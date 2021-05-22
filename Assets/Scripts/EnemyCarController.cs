@@ -29,23 +29,20 @@ public class EnemyCarController : MonoBehaviour
         {
             if (this.mainTarget != null) 
             {
-                this.rb.AddForce(this.mainTarget.position - transform.position);
+                Debug.Log("hay this.mainTarget");
+                this.moveTo(this.mainTarget);
+                this.lookAt(this.mainTarget, Time.deltaTime);
             } 
             else if (this.waypointIndex <= this.waypoints.Length - 1)
             {
                 var waypoint = this.waypoints[this.waypointIndex];
-                this.rb.AddForce(waypoint.position - transform.position);
+                this.moveTo(waypoint);
                 
-                var rotation = Quaternion.LookRotation(waypoint.position);
-                rotation.x = 0f;
-                rotation.y = 0f;
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, 10f * Time.deltaTime);
-
                 Debug.Log($"this.transform.position {this.transform.position} waypoint.position {waypoint.position}");
+                this.lookAt(waypoint, Time.deltaTime);
 
                 if (this.isNearWaypoint(waypoint))
                 {
-                    Debug.Log("TRUE");
                     this.waypointIndex += 1;
                 }
             }
@@ -93,5 +90,27 @@ public class EnemyCarController : MonoBehaviour
     {
         var rect = new Rect(waypoint.position.x, waypoint.position.y, 75, 75);
         return rect.Contains(this.transform.position);
+    }
+
+    private void moveTo(Transform target)
+    {
+        this.rb.AddForce((target.position - transform.position).normalized * 5f);
+    }
+
+    private void lookAt(Transform target, float time)
+    {
+        var diffVector = target.position - this.transform.position;
+        var direction = this.transform.rotation * Vector2.up;
+        var angleDiff = Vector2.SignedAngle(direction, diffVector);
+        var clampedDiff = Mathf.Clamp(
+            angleDiff,
+            -100 * time,
+            100 * time
+        );
+
+        this.transform.rotation = Quaternion.AngleAxis(
+            this.transform.eulerAngles.z + clampedDiff,
+            Vector3.forward
+        );
     }
 }
