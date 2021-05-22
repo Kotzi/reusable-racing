@@ -5,6 +5,7 @@ public class EnemyCarController : MonoBehaviour
     const float SPEED_FORCE = 10f;
     const float MAX_SPEED = 5f;
 
+    public Transform mainTarget;
     public Transform[] waypoints;
 
     private int waypointIndex = 0;
@@ -21,13 +22,18 @@ public class EnemyCarController : MonoBehaviour
     {
         if (!this.gameController.isFighting)
         {
-            if (this.waypointIndex <= this.waypoints.Length - 1)
+            if (this.mainTarget != null) {
+                this.transform.position = Vector2.MoveTowards(this.transform.position,
+                    this.mainTarget.position,
+                    2f * Time.deltaTime);
+            } 
+            else if (this.waypointIndex <= this.waypoints.Length - 1)
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position,
-                this.waypoints[this.waypointIndex].transform.position,
+                this.waypoints[this.waypointIndex].position,
                 2f * Time.deltaTime);
 
-                if (this.transform.position == this.waypoints[this.waypointIndex].transform.position)
+                if (this.transform.position == this.waypoints[this.waypointIndex].position)
                 {
                     this.waypointIndex += 1;
                 }
