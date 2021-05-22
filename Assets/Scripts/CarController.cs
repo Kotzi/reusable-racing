@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-	const float SPEED_FORCE = 15f;
-	const float TORQUE_FORCE = -200f;
-	const float DRIFT_FACTOR_STICKY = 0.9f;
-	const float DRIFT_FACTOR_SLIPPY = 1;
- 	const float MAX_STICKY_VELOCITY = 2.5f;
-	const float MAX_SLIPPY_VELOCITY = 1.5f; // ???
+	const float SPEED_FORCE = 5f;
+	const float TORQUE_FORCE = -100f;
+	const float DRIFT_FACTOR_STICKY = 0.4f;
+	const float DRIFT_FACTOR_SLIPPY = 0.5f;
+ 	const float MAX_STICKY_VELOCITY = 1.5f;
+	const float MAX_SLIPPY_VELOCITY = 0.5f; // ???
 
     private Rigidbody2D rb;
 
