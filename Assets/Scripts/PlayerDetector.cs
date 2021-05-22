@@ -11,19 +11,11 @@ public class PlayerDetector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        var player = collider.GetComponent<CarController>();
-        if (player != null)
-        {
-            car.mainTarget = player.transform;
-        }
+        car.updateMainTarget(collider.transform);
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        var player = collider.GetComponent<CarController>();
-        if (player != null && car.mainTarget != null && player == car.mainTarget)
-        {
-            car.mainTarget = null;
-        }
+        car.updateMainTarget(null);
     }
 }

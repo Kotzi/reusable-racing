@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6436677181975996833}
   - component: {fileID: 7207038806371437413}
   - component: {fileID: 5603544437473658799}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 5526951450915314804}
   - component: {fileID: -3173641652568661438}
   - component: {fileID: 3536636381771200623}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
