@@ -40,6 +40,7 @@ public class EnemyCarController : MonoBehaviour
         else
         {
             this.rb.velocity = Vector2.zero;
+            this.rb.angularVelocity = 0f;
         }
 	}
 }

@@ -4,6 +4,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject fightCanvasPrefab;
     public bool isFighting { get; private set; } = false;
+    
     public void fight(RPGEnemyController enemy)
     {
         if (!this.isFighting)
@@ -12,11 +13,10 @@ public class GameController : MonoBehaviour
 
             FightCanvasController canvas = Instantiate(this.fightCanvasPrefab, this.transform.parent).GetComponent<FightCanvasController>();
             canvas.setup(this, enemy);
-            print("Fighting against " + enemy.enemyName);
         }
     }
 
-    public void fightFinished()
+    public void fightFinished(bool youWin)
     {
         this.isFighting = false;
     }

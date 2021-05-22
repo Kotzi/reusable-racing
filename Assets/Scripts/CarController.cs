@@ -58,6 +58,7 @@ public class CarController : MonoBehaviour
         else
         {
             this.rb.velocity = Vector2.zero;
+            this.rb.angularVelocity = 0f;
         }
 	}
 
