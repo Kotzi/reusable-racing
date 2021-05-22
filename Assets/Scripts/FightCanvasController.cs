@@ -14,8 +14,17 @@ public class FightCanvasController : MonoBehaviour
     public Slider enemyHealthSlider;
     public TMP_Text playerNameText;
     public Slider playerHealthSlider;
+    public Slider playerTimeSlider;
+
     private GameController gameController;
     private RPGEnemyController enemy;
+    private float playerWait = 1f;
+
+    void Update()
+    {
+        this.playerWait += Time.deltaTime;
+        this.playerTimeSlider.value = Mathf.Clamp01(this.playerWait);
+    }
 
     public void setup(GameController gameController, RPGEnemyController enemy)
     {
@@ -46,13 +55,19 @@ public class FightCanvasController : MonoBehaviour
 
     void attackEnemy(int damage)
     {
-        this.enemy.takeDamage(damage);
-
-        this.enemyHealthSlider.value = this.enemy.healthPercentage();
-
-        if (!this.enemy.isAlive())
+        if (this.playerWait >= 1f)
         {
-            this.finishFight(true);
+            this.playerWait = 0f;
+            this.playerTimeSlider.value = 0f;
+
+            this.enemy.takeDamage(damage);
+
+            this.enemyHealthSlider.value = this.enemy.healthPercentage();
+
+            if (!this.enemy.isAlive())
+            {
+                this.finishFight(true);
+            }
         }
     }
 
