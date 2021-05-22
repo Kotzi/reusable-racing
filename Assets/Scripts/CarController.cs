@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-	const float SPEED_FORCE = 5f;
+	const float SPEED_FORCE = 10f;
+    const float MAX_SPEED = 5f;
 	const float TORQUE_FORCE = -100f;
 	const float DRIFT_FACTOR_STICKY = 0.4f;
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
@@ -29,13 +30,25 @@ public class CarController : MonoBehaviour
 
 		this.rb.velocity = this.getForwardVelocity() + rightVelocity * driftFactor;
 
-		if(Input.GetButton("Gas")) 
+        float speed = this.rb.velocity.magnitude;
+        print(speed);
+        if (speed > MAX_SPEED)
+        {
+            float brakeSpeed = speed - MAX_SPEED;
+        
+            Vector3 normalisedVelocity = this.rb.velocity.normalized;
+            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
+        
+            this.rb.AddForce(-brakeVelocity); 
+        } 
+        else if(Input.GetButton("Gas")) 
         {
 			this.rb.AddForce(this.transform.up * SPEED_FORCE);
 
 			// Consider using rb.AddForceAtPosition to apply force twice, at the position
 			// of the rear tires/tyres
 		}
+
 		if(Input.GetButton("Brake")) {
 			this.rb.AddForce(this.transform.up * -SPEED_FORCE/2f);
 

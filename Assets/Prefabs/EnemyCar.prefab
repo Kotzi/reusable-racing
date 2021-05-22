@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6986999914955846337}
   - component: {fileID: 496580600765102044}
   - component: {fileID: 5526951450915314804}
-  - component: {fileID: 2881620577048163622}
+  - component: {fileID: -3173641652568661438}
   m_Layer: 0
-  m_Name: Car
+  m_Name: EnemyCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -174901261
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 02621471d78a347c2be3ebf1e2326acb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afaf8dcfbbd2f416d925688e03e39d42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.13, y: 0.26}
   m_Direction: 0
---- !u!114 &2881620577048163622
+--- !u!114 &-3173641652568661438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +131,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7483773569161365984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1d3aa1002434c9daa362cc24398d4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 71f217ae04c9a440eb0c6f8e663a8c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
