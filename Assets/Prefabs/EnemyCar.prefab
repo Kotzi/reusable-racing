@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 496580600765102044}
   - component: {fileID: 5526951450915314804}
   - component: {fileID: -3173641652568661438}
+  - component: {fileID: 3536636381771200623}
   m_Layer: 0
   m_Name: EnemyCar
   m_TagString: Untagged
@@ -134,3 +135,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f217ae04c9a440eb0c6f8e663a8c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoints: []
+--- !u!114 &3536636381771200623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483773569161365984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30effa269480b4e0ab6c41c418ffbfd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Default enemyName

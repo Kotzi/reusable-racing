@@ -1,34 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCarController : MonoBehaviour
 {
+    const float SPEED_FORCE = 10f;
+    const float MAX_SPEED = 5f;
+
     public Transform[] waypoints;
-    private float moveSpeed = 2f;
+
     private int waypointIndex = 0;
+    private Rigidbody2D rb;
+    private GameController gameController;
 
-	private void Start () 
+	void Awake () 
     {
-        this.transform.position = this.waypoints[this.waypointIndex].transform.position;
+        this.rb = this.GetComponent<Rigidbody2D>();
+        this.gameController = Object.FindObjectOfType<GameController>();
 	}
-	
-	private void Update () 
+    
+	void Update () 
     {
-        if (this.waypointIndex <= this.waypoints.Length - 1)
+        if (!this.gameController.isFighting)
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position,
-               this.waypoints[this.waypointIndex].transform.position,
-               moveSpeed * Time.deltaTime);
-
-            if (this.transform.position == this.waypoints[this.waypointIndex].transform.position)
+            if (this.waypointIndex <= this.waypoints.Length - 1)
             {
-                this.waypointIndex += 1;
+                this.transform.position = Vector2.MoveTowards(this.transform.position,
+                this.waypoints[this.waypointIndex].transform.position,
+                2f * Time.deltaTime);
+
+                if (this.transform.position == this.waypoints[this.waypointIndex].transform.position)
+                {
+                    this.waypointIndex += 1;
+                }
+            }
+            else 
+            {
+                this.waypointIndex = 0;
             }
         }
-        else 
+        else
         {
-            this.waypointIndex = 0;
+            this.rb.velocity = Vector2.zero;
         }
 	}
 }
