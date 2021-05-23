@@ -136,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: -174901261
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: afaf8dcfbbd2f416d925688e03e39d42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0175883d52e245ee9fea311dac9e31b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -209,4 +209,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0be4c1eff3485e80063572b969716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: e40a32fd-5e60-4312-9e70-2817f6c0942e
   driverName: Enemy

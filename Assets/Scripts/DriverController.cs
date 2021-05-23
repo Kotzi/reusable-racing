@@ -6,17 +6,18 @@ public class DriverController: MonoBehaviour
 
     public string id = System.Guid.NewGuid().ToString();
     public string driverName = "name";
+    public CarController car { get; private set; }
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private int health = MAX_LIFE;
     private int lives = 3;
-    private int laps = 0;
 
     void Awake()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.rb = this.GetComponent<Rigidbody2D>();
+        this.car = this.GetComponent<CarController>();
     }
 
     public Sprite getSprite()
@@ -44,8 +45,10 @@ public class DriverController: MonoBehaviour
         return (this.health > 0);
     }
 
-    public void fightFinished()
+    public void fightFinished(bool youWon)
     {
+        this.car.fightFinished(youWon);
+
         if (this.lives <= 0)
         {
             Destroy(this.gameObject);
@@ -54,16 +57,5 @@ public class DriverController: MonoBehaviour
         {
             this.health = MAX_LIFE;
         }
-    }
-
-    public bool shouldGetNewLap()
-    {
-        return this.rb.velocity.y > 0; // Improve this
-    }
-
-    public void newLap()
-    {
-        this.laps += 1;
-        print("NEW LAP!");
     }
 }

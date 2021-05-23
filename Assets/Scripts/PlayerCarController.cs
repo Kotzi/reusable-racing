@@ -12,7 +12,7 @@ public class PlayerCarController: CarController
 
 	void FixedUpdate () 
     {
-        if (!this.gameController.isFighting)
+        if (this.gameController.carsCanMove())
         {
             var driftFactor = DRIFT_FACTOR_STICKY;
             var rightVelocity = this.getRightVelocity();
@@ -35,7 +35,7 @@ public class PlayerCarController: CarController
             } 
             else if(Input.GetButton("Gas")) 
             {
-                this.rb.AddForce(this.transform.up * SPEED_FORCE);
+                this.rb.AddForce(this.transform.up * (SPEED_FORCE + this.turbo));
             }
 
             if(Input.GetButton("Brake")) 
@@ -69,4 +69,9 @@ public class PlayerCarController: CarController
 	Vector2 getRightVelocity() {
 		return this.transform.right * Vector2.Dot(this.rb.velocity, this.transform.right);
 	}
+    public override void newLap()
+    {
+        base.newLap();
+        this.gameController.playerCompletedLap(this.lap);
+    }
 }

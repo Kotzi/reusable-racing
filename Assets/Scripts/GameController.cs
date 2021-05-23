@@ -7,7 +7,8 @@ public class GameController : MonoBehaviour
     public RaceUICanvas raceUICanvas;
     public TrackController currentTrack;
     public bool isFighting { get; private set; } = false;
-    
+    public bool raceStarted = false;
+
     public void fight(DriverController enemy)
     {
         if (!this.isFighting)
@@ -22,5 +23,15 @@ public class GameController : MonoBehaviour
     public void fightFinished(bool youWin)
     {
         this.isFighting = false;
+    }
+
+    public bool carsCanMove()
+    {
+        return (this.raceStarted && !this.isFighting);
+    }
+
+    public void playerCompletedLap(int currentLap)
+    {
+        this.raceUICanvas.updateLaps(currentLap, this.currentTrack.laps);
     }
 }

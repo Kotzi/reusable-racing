@@ -15,7 +15,7 @@ public class EnemyCarController: CarController
     
 	void FixedUpdate() 
     {
-        if (!this.gameController.isFighting)
+        if (this.gameController.carsCanMove())
         {
             if (this.mainTarget != null) 
             {
@@ -25,10 +25,10 @@ public class EnemyCarController: CarController
             else if (this.waypointTarget <= this.waypoints.Length - 1)
             {
                 var waypoint = this.waypoints[this.waypointTarget];
+                this.lookAt(waypoint.transform, Time.deltaTime);
                 this.moveTo(waypoint.transform);
                 
                 //Debug.Log($"this.transform.position {this.transform.position} waypoint.position {waypoint.position}");
-                this.lookAt(waypoint.transform, Time.deltaTime);
 
                 if (waypoint.getBounds().Contains(this.transform.position))
                 {
@@ -39,6 +39,8 @@ public class EnemyCarController: CarController
             {
                 this.waypointTarget = 0;
             }
+
+            print(this.waypointTarget);
         }
         else
         {
@@ -59,7 +61,20 @@ public class EnemyCarController: CarController
 
     private void moveTo(Transform target)
     {
-        this.rb.AddForce((target.position - transform.position).normalized * 10f);
+        float speed = this.rb.velocity.magnitude;
+        if (speed > MAX_SPEED)
+        {
+            float brakeSpeed = speed - MAX_SPEED;
+        
+            Vector3 normalisedVelocity = this.rb.velocity.normalized;
+            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
+        
+            this.rb.AddForce(-brakeVelocity); 
+        }
+        else
+        {
+            this.rb.AddForce((target.position - transform.position).normalized * (10f + this.turbo));
+        }
     }
 
     private void lookAt(Transform target, float time)

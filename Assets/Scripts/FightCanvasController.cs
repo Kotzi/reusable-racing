@@ -2,7 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-public class FightCanvasController : MonoBehaviour
+
+public class FightCanvasController: MonoBehaviour
 {
     const int BAG_DAMAGE = 30;
     const float BAG_ACCURACY = 0.75f;
@@ -173,11 +174,11 @@ public class FightCanvasController : MonoBehaviour
         this.playerHealthChangedSequence.Play();
     }
 
-    void finishFight(bool youWin)
+    void finishFight(bool youWon)
     {
-        this.enemy.fightFinished();
-        this.player.fightFinished();
-        this.gameController.fightFinished(youWin);
+        this.enemy.fightFinished(!youWon);
+        this.player.fightFinished(youWon);
+        this.gameController.fightFinished(youWon);
         Destroy(this.transform.gameObject.GetComponentInParent<Canvas>().gameObject);
     }
 }
