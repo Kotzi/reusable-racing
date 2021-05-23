@@ -26,8 +26,8 @@ public class FightCanvasController : MonoBehaviour
     public Slider playerTimeSlider;
 
     private GameController gameController;
-    private RPGEnemyController enemy;
-    private PlayerController player;
+    private DriverController enemy;
+    private DriverController player;
     private float playerWait = 1f;
     private float enemyAttackCooldown = ENEMY_MAX_COOLDOWN;
     private Sequence enemyHealthChangedSequence;
@@ -76,17 +76,17 @@ public class FightCanvasController : MonoBehaviour
         }
     }
 
-    public void setup(GameController gameController, PlayerController player, RPGEnemyController enemy)
+    public void setup(GameController gameController, DriverController player, DriverController enemy)
     {
         this.gameController = gameController;
 
         this.enemy = enemy;
-        this.enemyNameText.text = enemy.enemyName;
+        this.enemyNameText.text = enemy.driverName;
         this.enemyImage.sprite = enemy.getSprite();
         this.enemyImage.transform.DOShakePosition(0.25f, 3f, 15).SetLoops(-1);
 
         this.player = player;
-        this.playerNameText.text = player.playerName;
+        this.playerNameText.text = player.driverName;
         this.playerImage.sprite = player.getSprite();
         this.playerImage.transform.DOShakePosition(0.25f, 3f, 15).SetLoops(-1);
 

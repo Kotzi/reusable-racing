@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3703293427052175843}
   - component: {fileID: 6405373927116890409}
+  - component: {fileID: 4870470081945665032}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Untagged
@@ -38,7 +39,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5918038395253679741}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4870470081945665032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918038395253679741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b24229b6ccd4c33a7c34b38409b5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

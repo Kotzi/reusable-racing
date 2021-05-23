@@ -1,26 +1,16 @@
 using UnityEngine;
 
-public class EnemyCarController : MonoBehaviour
+public class EnemyCarController: CarController
 {
     const float SPEED_FORCE = 10f;
     const float MAX_SPEED = 5f;
 
-    public Transform[] waypoints;
-
-    private int waypointIndex = 0;
-    private Rigidbody2D rb;
-    private GameController gameController;
+    private int waypointTarget = 0;
     private Transform mainTarget;
-
-	void Awake() 
-    {
-        this.rb = this.GetComponent<Rigidbody2D>();
-        this.gameController = Object.FindObjectOfType<GameController>();
-	}
     
     void Start()
     {
-        this.forceUpdateWaypointIndex();
+        this.waypointTarget = this.nextWaypoint;
     }
     
 	void FixedUpdate() 
@@ -29,26 +19,25 @@ public class EnemyCarController : MonoBehaviour
         {
             if (this.mainTarget != null) 
             {
-                Debug.Log("hay this.mainTarget");
                 this.moveTo(this.mainTarget);
                 this.lookAt(this.mainTarget, Time.deltaTime);
             } 
-            else if (this.waypointIndex <= this.waypoints.Length - 1)
+            else if (this.waypointTarget <= this.waypoints.Length - 1)
             {
-                var waypoint = this.waypoints[this.waypointIndex];
-                this.moveTo(waypoint);
+                var waypoint = this.waypoints[this.waypointTarget];
+                this.moveTo(waypoint.transform);
                 
-                Debug.Log($"this.transform.position {this.transform.position} waypoint.position {waypoint.position}");
-                this.lookAt(waypoint, Time.deltaTime);
+                //Debug.Log($"this.transform.position {this.transform.position} waypoint.position {waypoint.position}");
+                this.lookAt(waypoint.transform, Time.deltaTime);
 
-                if (this.isNearWaypoint(waypoint))
+                if (waypoint.getBounds().Contains(this.transform.position))
                 {
-                    this.waypointIndex += 1;
+                    this.waypointTarget += 1;
                 }
             }
             else 
             {
-                this.waypointIndex = 0;
+                this.waypointTarget = 0;
             }
         }
         else
@@ -64,37 +53,13 @@ public class EnemyCarController : MonoBehaviour
 
         if (this.mainTarget == null)
         {
-            this.forceUpdateWaypointIndex();
+            this.waypointTarget = this.nextWaypoint;
         }
-    }
-
-    private void forceUpdateWaypointIndex()
-    {
-        var closestWaypoint = 0;
-        float distanceToClosestWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, this.waypoints[closestWaypoint].position));
-        for (int i = 0; i < this.waypoints.Length; i++)
-        {
-            var waypoint = this.waypoints[i];
-            float distanceToWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, waypoint.position));
-            if (distanceToWaypoint <= distanceToClosestWaypoint)
-            {
-                closestWaypoint = i;
-                distanceToClosestWaypoint = distanceToWaypoint;
-            }
-        }
-
-        this.waypointIndex = closestWaypoint + 1;
-    }
-
-    private bool isNearWaypoint(Transform waypoint)
-    {
-        var rect = new Rect(waypoint.position.x, waypoint.position.y, 75, 75);
-        return rect.Contains(this.transform.position);
     }
 
     private void moveTo(Transform target)
     {
-        this.rb.AddForce((target.position - transform.position).normalized * 5f);
+        this.rb.AddForce((target.position - transform.position).normalized * 10f);
     }
 
     private void lookAt(Transform target, float time)

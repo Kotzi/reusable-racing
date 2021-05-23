@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCarController : MonoBehaviour
+public class PlayerCarController: CarController
 {
 	const float SPEED_FORCE = 10f;
     const float MAX_SPEED = 5f;
@@ -9,15 +9,6 @@ public class PlayerCarController : MonoBehaviour
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
  	const float MAX_STICKY_VELOCITY = 1.5f;
 	const float MAX_SLIPPY_VELOCITY = 0.5f; // ???
-
-    private Rigidbody2D rb;
-    private GameController gameController;
-
-	void Awake () 
-    {
-        this.rb = this.GetComponent<Rigidbody2D>();
-        this.gameController = Object.FindObjectOfType<GameController>();
-	}
 
 	void FixedUpdate () 
     {
@@ -64,7 +55,7 @@ public class PlayerCarController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        var enemy = collision.collider.GetComponent<RPGEnemyController>();
+        var enemy = collision.collider.GetComponent<DriverController>();
         if (enemy != null)
         {
             this.gameController.fight(enemy);

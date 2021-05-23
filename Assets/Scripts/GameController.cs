@@ -3,10 +3,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject fightCanvasPrefab;
-    public PlayerController player;
+    public DriverController player;
+    public RaceUICanvas raceUICanvas;
+    public TrackController currentTrack;
     public bool isFighting { get; private set; } = false;
     
-    public void fight(RPGEnemyController enemy)
+    public void fight(DriverController enemy)
     {
         if (!this.isFighting)
         {
