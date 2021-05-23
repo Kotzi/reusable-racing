@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarController : MonoBehaviour
+public class PlayerCarController : MonoBehaviour
 {
 	const float SPEED_FORCE = 10f;
     const float MAX_SPEED = 5f;

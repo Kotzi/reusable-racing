@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject fightCanvasPrefab;
+    public PlayerController player;
     public bool isFighting { get; private set; } = false;
     
     public void fight(RPGEnemyController enemy)
@@ -12,7 +13,7 @@ public class GameController : MonoBehaviour
             this.isFighting = true;
 
             FightCanvasController canvas = Instantiate(this.fightCanvasPrefab, this.transform.parent).GetComponent<FightCanvasController>();
-            canvas.setup(this, enemy);
+            canvas.setup(this, this.player, enemy);
         }
     }
 

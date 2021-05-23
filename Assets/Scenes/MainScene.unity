@@ -507,10 +507,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7483773569161365984, guid: 3b946649a53d142c7a39d96d8d9fd218, type: 3}
       propertyPath: m_Name
-      value: Car
+      value: PlayerCar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b946649a53d142c7a39d96d8d9fd218, type: 3}
+--- !u!114 &1171038122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8838926294233231713, guid: 3b946649a53d142c7a39d96d8d9fd218, type: 3}
+  m_PrefabInstance: {fileID: 1171038121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780cc779cd4348ca9060fd315aa283c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1387430798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6778536613943721388, guid: 3c975c1fa55bf47039ef1855c44ac510, type: 3}
@@ -840,6 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fightCanvasPrefab: {fileID: 3807251650119573776, guid: 78196f00a8a454724adb646dfc9e830e, type: 3}
+  player: {fileID: 1171038122}
 --- !u!4 &1923418898
 Transform:
   m_ObjectHideFlags: 0

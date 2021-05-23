@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class RPGEnemyController : MonoBehaviour
+public class PlayerController: MonoBehaviour
 {
     const int MAX_LIFE = 100;
-    public string enemyName = "Default enemyName";
+
+    public string playerName = "default player";
+
     private int health = MAX_LIFE;
     private int lives = 3;
+
+    public Sprite getSprite()
+    {
+        return this.GetComponent<SpriteRenderer>().sprite;
+    }
 
     public void takeDamage(int amount)
     {
@@ -32,15 +39,11 @@ public class RPGEnemyController : MonoBehaviour
         if (this.lives <= 0)
         {
             Destroy(this.gameObject);
+            print("YOU LOST");
         }
         else
         {
             this.health = MAX_LIFE;
         }
-    }
-
-    public Sprite getSprite()
-    {
-        return this.GetComponent<SpriteRenderer>().sprite;
     }
 }

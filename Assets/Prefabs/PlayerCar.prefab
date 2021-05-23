@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6986999914955846337}
   - component: {fileID: 496580600765102044}
   - component: {fileID: 5526951450915314804}
-  - component: {fileID: 2881620577048163622}
+  - component: {fileID: 9181023725468465210}
+  - component: {fileID: 8838926294233231713}
   m_Layer: 6
-  m_Name: Car
+  m_Name: PlayerCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +123,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.13, y: 0.26}
   m_Direction: 0
---- !u!114 &2881620577048163622
+--- !u!114 &9181023725468465210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +132,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7483773569161365984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1d3aa1002434c9daa362cc24398d4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 968327112351c43bf8c05ad776b11d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8838926294233231713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483773569161365984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780cc779cd4348ca9060fd315aa283c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: default player name
