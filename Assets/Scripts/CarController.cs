@@ -15,6 +15,7 @@ public class CarController: MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private DriverController driver;
+    private ParticleSystem dustParticles;
     private Collider2D mainCollider;
 
 	void Awake() 
@@ -24,6 +25,7 @@ public class CarController: MonoBehaviour
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.driver = this.GetComponent<DriverController>();
         this.mainCollider = this.GetComponent<Collider2D>();
+        this.dustParticles = this.GetComponentInChildren<ParticleSystem>();
         this.forceUpdateWaypointIndex();
 	}
 
@@ -54,6 +56,11 @@ public class CarController: MonoBehaviour
         }
 
         this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
+    }
+
+    void LateUpdate()
+    {
+        this.dustParticles.gameObject.SetActive(this.rb.velocity != Vector2.zero);
     }
 
     public bool shouldGetNewLap()
