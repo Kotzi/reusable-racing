@@ -4,7 +4,7 @@ public class PlayerDetector: MonoBehaviour
 {
     private EnemyCarController car;
     private Collider2D mainCollider;
-    private float cooldown = 5f;
+    private float cooldown = 8f;
 
     void Awake()
     {

@@ -7,9 +7,11 @@ public class EnemyCarController: CarController
 
     private int waypointTarget = 0;
     private Transform mainTarget;
+    private DriverController driver;
     
     void Start()
     {
+        this.driver = this.GetComponent<DriverController>();
         this.waypointTarget = this.nextWaypoint;
     }
     
@@ -28,8 +30,6 @@ public class EnemyCarController: CarController
                 this.lookAt(waypoint.transform, Time.deltaTime);
                 this.moveTo(waypoint.transform);
                 
-                //Debug.Log($"this.transform.position {this.transform.position} waypoint.position {waypoint.position}");
-
                 if (waypoint.getBounds().Contains(this.transform.position))
                 {
                     this.waypointTarget += 1;
@@ -39,8 +39,6 @@ public class EnemyCarController: CarController
             {
                 this.waypointTarget = 0;
             }
-
-            print(this.waypointTarget);
         }
         else
         {
@@ -57,6 +55,12 @@ public class EnemyCarController: CarController
         {
             this.waypointTarget = this.nextWaypoint;
         }
+    }
+
+    public override void newLap()
+    {
+        base.newLap();
+        this.gameController.enemyCompletedLap(this.driver.driverName, this.lap);
     }
 
     private void moveTo(Transform target)

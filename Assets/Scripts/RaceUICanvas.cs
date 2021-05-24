@@ -1,6 +1,7 @@
 using TMPro;
 using DG.Tweening;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RaceUICanvas : MonoBehaviour
 {
@@ -39,8 +40,14 @@ public class RaceUICanvas : MonoBehaviour
                 });
     }
 
-    public void updateDebugText(string text)
+    public void updatePositions(List<(string, int, int, float)> positions)
     {
+        var text = "";
+        foreach (var p in positions)
+        {
+            text += $"{p.Item1}\n";
+        }
+        
         this.debugText.text = text;
     }
 

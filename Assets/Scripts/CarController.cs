@@ -122,7 +122,10 @@ public class CarController: MonoBehaviour
 
         for (int i = 0; i < others.Length; i++)
         {
-            Physics2D.IgnoreCollision(this.mainCollider, others[i].mainCollider, false);
+            if (others[i] != null && others[i].mainCollider != null)
+            {
+                Physics2D.IgnoreCollision(this.mainCollider, others[i].mainCollider, false);
+            }
         }
 
         this.turbo = 0f;

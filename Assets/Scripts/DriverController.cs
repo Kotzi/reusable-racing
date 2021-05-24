@@ -51,6 +51,7 @@ public class DriverController: MonoBehaviour
 
         if (this.lives <= 0)
         {
+            this.car.gameController.enemyDied(this.id);
             Destroy(this.gameObject);
         }
         else
