@@ -33,5 +33,10 @@ public class GameController : MonoBehaviour
     public void playerCompletedLap(int currentLap)
     {
         this.raceUICanvas.updateLaps(currentLap, this.currentTrack.laps);
+        
+        if (currentLap == this.currentTrack.laps)
+        {
+            print("Finished!");
+        }
     }
 }

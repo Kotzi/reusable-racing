@@ -12,23 +12,25 @@ public class TrackController : MonoBehaviour
     {
         var sortedPositions = new List<(string, int, int, float)>(this.positions.Values);
         sortedPositions.Sort(delegate((string, int, int, float) a, (string, int, int, float) b) {
-            if (a.Item2 > b.Item2)
+            var laps = a.Item2.CompareTo(b.Item2);
+            if (laps != 0)
             {
-                return -1;
+                return laps;
             }
             else
             {
-                if (a.Item3 == b.Item3)
+                var waypoint = a.Item3.CompareTo(b.Item3);
+                if (waypoint != 0)
                 {
-                    return (a.Item4 < b.Item4 ? -1 : 1);
+                    return waypoint;
                 }
                 else
                 {
-                    return (a.Item3 > b.Item3 ? -1 : 1);
+                    return a.Item4.CompareTo(b.Item4);
                 }
             }
         });
-
+        sortedPositions.Reverse();
 
         var text = "";
         foreach (var p in sortedPositions)
