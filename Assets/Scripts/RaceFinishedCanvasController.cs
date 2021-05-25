@@ -36,6 +36,6 @@ public class RaceFinishedCanvasController : MonoBehaviour
     public void onContinueButtonClicked()
     {
         PersistentDataController.shared.level += 1;
-        this.gameController.tournamentFinished();
+        this.gameController.raceFinished();
     }
 }

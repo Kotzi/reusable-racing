@@ -4,6 +4,8 @@ using Cinemachine;
 public class GameController : MonoBehaviour
 {
     public GameObject fightCanvasPrefab;
+    public GameObject firstTrackPrefab;
+    public GameObject secondTrackPrefab;
     public DriverController player;
     public GameObject redCar;
     public GameObject purpleCar;
@@ -23,9 +25,25 @@ public class GameController : MonoBehaviour
 
         if(PersistentDataController.shared == null)
         {
-            this.gameObject.AddComponent<PersistentDataController>();
+            var persistentDataController = new GameObject("PersistentDataController");
+            persistentDataController.AddComponent<PersistentDataController>();
             PersistentDataController.shared.userName = "Testing Scene";
         }
+
+        PersistentDataController.shared.currentTrack += 1;
+
+        switch (PersistentDataController.shared.currentTrack)
+        {
+            case 0: {
+                this.currentTrack = Instantiate(this.firstTrackPrefab, this.transform.parent).GetComponent<TrackController>();
+                break;
+            }
+            case 1: {
+                this.currentTrack = Instantiate(this.secondTrackPrefab, this.transform.parent).GetComponent<TrackController>();
+                break;
+            }
+        }
+        this.currentTrack.gameController = this;
 
         switch (PersistentDataController.shared.car)
         {
@@ -123,6 +141,22 @@ public class GameController : MonoBehaviour
             }
         }
 
+        var redCarController = this.redCar.GetComponent<CarController>();
+        redCarController.waypoints = this.currentTrack.waypoints;
+        redCarController.forceUpdateWaypointIndex();
+
+        var purpleCarController = this.purpleCar.GetComponent<CarController>();
+        purpleCarController.waypoints = this.currentTrack.waypoints;
+        purpleCarController.forceUpdateWaypointIndex();
+
+        var blueCarController = this.blueCar.GetComponent<CarController>();
+        blueCarController.waypoints = this.currentTrack.waypoints;
+        blueCarController.forceUpdateWaypointIndex();
+
+        var greenCarController = this.greenCar.GetComponent<CarController>();
+        greenCarController.waypoints = this.currentTrack.waypoints;
+        greenCarController.forceUpdateWaypointIndex();
+
         this.mainCamera.Follow = this.player.transform;
         this.player.driverName = PersistentDataController.shared.userName;
     }
@@ -173,8 +207,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void tournamentFinished()
+    public void raceFinished()
     {
-        this.sceneManager.goToPreviousScene();
+        if (PersistentDataController.shared.currentTrack < 2)
+        {
+            this.sceneManager.reloadCurrentScene();
+        }
+        else 
+        {
+            this.sceneManager.goToPreviousScene();
+        }
     }
 }

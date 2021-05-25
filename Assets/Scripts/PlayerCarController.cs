@@ -8,7 +8,6 @@ public class PlayerCarController: CarController
 	const float DRIFT_FACTOR_STICKY = 0.4f;
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
  	const float MAX_STICKY_VELOCITY = 1.5f;
-	const float MAX_SLIPPY_VELOCITY = 0.5f; // ???
 
 	void FixedUpdate () 
     {
@@ -69,6 +68,7 @@ public class PlayerCarController: CarController
 	Vector2 getRightVelocity() {
 		return this.transform.right * Vector2.Dot(this.rb.velocity, this.transform.right);
 	}
+
     public override void newLap()
     {
         base.newLap();

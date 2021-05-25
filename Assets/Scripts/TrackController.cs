@@ -8,6 +8,7 @@ public class TrackController : MonoBehaviour
     public Transform enemy1StartPosition;
     public Transform enemy2StartPosition;
     public Transform enemy3StartPosition;
+    public Waypoint[] waypoints;
     public List<(string, int, int, float)> sortedPositions { get; private set; } = new List<(string, int, int, float)>();
 
     public int laps = 3;

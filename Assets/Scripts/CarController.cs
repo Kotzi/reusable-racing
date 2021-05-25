@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class CarController: MonoBehaviour
 {
-    public Waypoint[] waypoints;
+    public Waypoint[] waypoints = null;
     public int nextWaypoint { get; private set; } = 0;
     public float distanceToNextWaypoint { get; private set; } = 0f;
 
@@ -26,36 +26,38 @@ public class CarController: MonoBehaviour
         this.driver = this.GetComponent<DriverController>();
         this.mainCollider = this.GetComponent<Collider2D>();
         this.dustParticles = this.GetComponentInChildren<ParticleSystem>();
-        this.forceUpdateWaypointIndex();
 	}
 
     void Update()
     {
-        if (this.turbo > 0)
+        if (this.waypoints != null && this.nextWaypoint < this.waypoints.Length - 1)
         {
-            this.turbo = Mathf.Lerp(this.turbo, 0, Time.deltaTime);
-        }
-
-        this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
-        if (this.distanceToNextWaypoint > 3f) 
-        {
-            this.forceUpdateWaypointIndex();
-        }
-        else if (this.waypoints[this.nextWaypoint].getBounds().Contains(this.transform.position))
-        {
-            if (this.nextWaypoint < this.waypoints.Length - 1)
+            if (this.turbo > 0)
             {
-                this.nextWaypoint += 1;
-            }
-            else
-            {
-                this.nextWaypoint = 0;
+                this.turbo = Mathf.Lerp(this.turbo, 0, Time.deltaTime);
             }
 
             this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
-        }
+            if (this.distanceToNextWaypoint > 3f) 
+            {
+                this.forceUpdateWaypointIndex();
+            }
+            else if (this.waypoints[this.nextWaypoint].getBounds().Contains(this.transform.position))
+            {
+                if (this.nextWaypoint < this.waypoints.Length - 1)
+                {
+                    this.nextWaypoint += 1;
+                }
+                else
+                {
+                    this.nextWaypoint = 0;
+                }
 
-        this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
+                this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
+            }
+
+            this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
+        }
     }
 
     void LateUpdate()
@@ -88,32 +90,35 @@ public class CarController: MonoBehaviour
         this.StartCoroutine(this.toggleCollider());
     }
 
-    private void forceUpdateWaypointIndex()
+    public void forceUpdateWaypointIndex()
     {
-        this.nextWaypoint = 0;
-        this.distanceToNextWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position));
-        
-        for (int i = 0; i < this.waypoints.Length; i++)
-        {
-            var waypoint = this.waypoints[i];
-            float distanceToWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, waypoint.transform.position));
-            if (distanceToWaypoint <= this.distanceToNextWaypoint)
-            {
-                this.nextWaypoint = i;
-                this.distanceToNextWaypoint = distanceToWaypoint;
-            }
-        }
-
-        if (this.nextWaypoint < this.waypoints.Length - 1)
-        {
-            this.nextWaypoint += 1;
-        }
-        else
+        if (this.waypoints.Length > 0)
         {
             this.nextWaypoint = 0;
-        }
+            this.distanceToNextWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position));
+            
+            for (int i = 0; i < this.waypoints.Length; i++)
+            {
+                var waypoint = this.waypoints[i];
+                float distanceToWaypoint = Mathf.Abs(Vector2.Distance(this.transform.position, waypoint.transform.position));
+                if (distanceToWaypoint <= this.distanceToNextWaypoint)
+                {
+                    this.nextWaypoint = i;
+                    this.distanceToNextWaypoint = distanceToWaypoint;
+                }
+            }
 
-        this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
+            if (this.nextWaypoint < this.waypoints.Length - 1)
+            {
+                this.nextWaypoint += 1;
+            }
+            else
+            {
+                this.nextWaypoint = 0;
+            }
+
+            this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
+        }
     }
 
     private IEnumerator toggleCollider()

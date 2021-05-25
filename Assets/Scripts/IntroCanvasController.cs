@@ -18,7 +18,8 @@ public class IntroCanvasController : MonoBehaviour
     {
         if(PersistentDataController.shared == null)
         {
-            this.gameObject.AddComponent<PersistentDataController>();
+            var persistentDataController = new GameObject("PersistentDataController");
+            persistentDataController.AddComponent<PersistentDataController>();
         }
 
         this.sceneManagerController.currentSceneIndex = 1;

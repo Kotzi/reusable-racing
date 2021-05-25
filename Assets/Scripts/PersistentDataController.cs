@@ -6,7 +6,7 @@ public class PersistentDataController: MonoBehaviour
 
     public string userName = null;
     public int level = 1;
-
+    public int currentTrack = -1;
     public int car = 0;
 
     void Awake()

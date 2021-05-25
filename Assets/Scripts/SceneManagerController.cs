@@ -11,6 +11,11 @@ public class SceneManagerController: MonoBehaviour
         Animator = GetComponent<Animator>();
     }
 
+    public void reloadCurrentScene()
+    {
+        Animator.SetTrigger("FadeOut");
+    }
+
     public void goToNextScene()
     {
         this.currentSceneIndex += 1;
