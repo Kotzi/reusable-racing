@@ -6,6 +6,8 @@ public class PersistentDataController: MonoBehaviour
 
     public string userName = null;
 
+    public int car = 0;
+
     void Awake()
     {
         if (PersistentDataController.shared == null)
