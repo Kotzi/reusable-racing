@@ -30,7 +30,7 @@ public class KotziSceneController: MonoBehaviour
             if (this.timer >= MAX_TIMER) 
             {
                 this.isTimerActive = false;
-                this.sceneManagerController.goToNexScene();
+                this.sceneManagerController.goToNextScene();
             }
         }
     }

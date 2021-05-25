@@ -11,17 +11,20 @@ public class SceneManagerController: MonoBehaviour
         Animator = GetComponent<Animator>();
     }
 
-    public void goToNexScene()
+    public void goToNextScene()
     {
-        if(this.currentSceneIndex < 2) // SceneManager.sceneCount)
-        {
-            this.currentSceneIndex += 1;
-            Animator.SetTrigger("FadeOut");
-        }
+        this.currentSceneIndex += 1;
+        Animator.SetTrigger("FadeOut");
+    }
+
+    public void goToPreviousScene()
+    {
+        this.currentSceneIndex -= 1;
+        Animator.SetTrigger("FadeOut");
     }
 
     public void OnFadeOutFinished()
     {
         SceneManager.LoadScene(this.currentSceneIndex);
-    }    
+    }
 }

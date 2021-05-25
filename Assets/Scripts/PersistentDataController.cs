@@ -5,6 +5,7 @@ public class PersistentDataController: MonoBehaviour
     public static PersistentDataController shared;
 
     public string userName = null;
+    public int level = 1;
 
     public int car = 0;
 

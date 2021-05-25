@@ -12,21 +12,34 @@ public class IntroCanvasController : MonoBehaviour
     public TMP_Text nameContinueButtonText;
     public CanvasRenderer carPanel;
 
-    public PersistentDataController persistentDataController;
     public SceneManagerController sceneManagerController;
 
     void Awake()
     {
+        if(PersistentDataController.shared == null)
+        {
+            this.gameObject.AddComponent<PersistentDataController>();
+        }
+
         this.sceneManagerController.currentSceneIndex = 1;
-        this.namePanel.gameObject.SetActive(true);
-        this.carPanel.gameObject.SetActive(false);
+
+        if (PersistentDataController.shared.level == 1) 
+        {
+            this.namePanel.gameObject.SetActive(true);
+            this.carPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.namePanel.gameObject.SetActive(false);
+            this.carPanel.gameObject.SetActive(true);
+        }
     }
 
     public void onNameContinueButtonClicked()
     {
         if (this.nameInputTextField.text != "")
         {
-            this.persistentDataController.userName = this.nameInputTextField.text;
+            PersistentDataController.shared.userName = this.nameInputTextField.text;
             this.namePanel.gameObject.SetActive(false);
             this.carPanel.gameObject.SetActive(true);
         }
@@ -58,7 +71,7 @@ public class IntroCanvasController : MonoBehaviour
 
     private void pickCar(int car)
     {
-        this.persistentDataController.car = car;
-        this.sceneManagerController.goToNexScene();
+        PersistentDataController.shared.car = car;
+        this.sceneManagerController.goToNextScene();
     }
 }

@@ -17,7 +17,17 @@ public class DriverController: MonoBehaviour
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.rb = this.GetComponent<Rigidbody2D>();
-        this.car = this.GetComponent<CarController>();
+    }
+
+    void Start()
+    {
+        foreach (var car in this.GetComponents<CarController>())
+        {
+            if (car.enabled)
+            {
+                this.car = car;
+            }
+        }
     }
 
     public Sprite getSprite()

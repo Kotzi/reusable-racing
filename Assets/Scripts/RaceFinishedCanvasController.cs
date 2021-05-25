@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class RaceFinishedCanvasController : MonoBehaviour
 {
     public TMP_Text titleText;
     public TMP_Text resultsText;
+    public GameController gameController;
 
     private List<string> positions = new List<string>();
 
@@ -35,6 +35,7 @@ public class RaceFinishedCanvasController : MonoBehaviour
 
     public void onContinueButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PersistentDataController.shared.level += 1;
+        this.gameController.tournamentFinished();
     }
 }
