@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/KotziScene.unity
+    guid: b456608dcd5294e3aa1987620f4d38ef
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 458dd6523d349446dbc8e42f0df051d8
+  - enabled: 1
+    path: Assets/Scenes/RaceScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

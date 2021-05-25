@@ -10,6 +10,11 @@ public class GameController : MonoBehaviour
     public bool isFighting { get; private set; } = false;
     public bool raceStarted = false;
 
+    void Awake()
+    {
+        this.player.driverName = PersistentDataController.shared.userName;
+    }
+
     public void fight(DriverController enemy)
     {
         if (!this.isFighting)
