@@ -9,16 +9,16 @@ public class TrackController : MonoBehaviour
     public Transform enemy2StartPosition;
     public Transform enemy3StartPosition;
     public Waypoint[] waypoints;
-    public List<(string, int, int, float)> sortedPositions { get; private set; } = new List<(string, int, int, float)>();
+    public List<(string, int, int, float, string)> sortedPositions { get; private set; } = new List<(string, int, int, float, string)>();
 
     public int laps = 3;
 
-    private Dictionary<string, (string, int, int, float)> positions = new Dictionary<string, (string, int, int, float)>();
+    private Dictionary<string, (string, int, int, float, string)> positions = new Dictionary<string, (string, int, int, float, string)>();
 
     void LateUpdate()
     {
-        this.sortedPositions = new List<(string, int, int, float)>(this.positions.Values);
-        this.sortedPositions.Sort(delegate((string, int, int, float) a, (string, int, int, float) b) {
+        this.sortedPositions = new List<(string, int, int, float, string)>(this.positions.Values);
+        this.sortedPositions.Sort(delegate((string, int, int, float, string) a, (string, int, int, float, string) b) {
             var laps = a.Item2.CompareTo(b.Item2);
             if (laps != 0)
             {
@@ -44,7 +44,7 @@ public class TrackController : MonoBehaviour
 
     public void updatePosition(string id, string name, int laps, int closestWaypoint, float distanceToClosestWaypoint)
     {
-        this.positions[id] = (name, laps, closestWaypoint, distanceToClosestWaypoint);
+        this.positions[id] = (name, laps, closestWaypoint, distanceToClosestWaypoint, id);
     }
 
     public void enemyDied(string id)

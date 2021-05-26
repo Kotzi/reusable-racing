@@ -863,6 +863,7 @@ MonoBehaviour:
   fightCanvasPrefab: {fileID: 3807251650119573776, guid: 78196f00a8a454724adb646dfc9e830e, type: 3}
   firstTrackPrefab: {fileID: 4336378933099891989, guid: 3c975c1fa55bf47039ef1855c44ac510, type: 3}
   secondTrackPrefab: {fileID: 4336378933099891989, guid: c1fa243d2522741679e8d8f6d3394a23, type: 3}
+  thirdTrackPrefab: {fileID: 4336378933099891989, guid: a596b16fc1631460ca5ef336a51bde39, type: 3}
   player: {fileID: 0}
   redCar: {fileID: 76797450}
   purpleCar: {fileID: 38514267}

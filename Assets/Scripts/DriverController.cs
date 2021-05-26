@@ -7,11 +7,11 @@ public class DriverController: MonoBehaviour
     public string id = System.Guid.NewGuid().ToString();
     public string driverName = "name";
     public CarController car { get; private set; }
+    public int lives = 3;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private int health = MAX_LIFE;
-    private int lives = 3;
 
     void Awake()
     {
@@ -64,8 +64,9 @@ public class DriverController: MonoBehaviour
             this.car.gameController.enemyDied(this.id);
             Destroy(this.gameObject);
         }
-        else
+        else if (this.health <= 0)
         {
+
             this.health = MAX_LIFE;
         }
     }

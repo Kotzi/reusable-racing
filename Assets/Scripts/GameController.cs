@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
     public GameObject fightCanvasPrefab;
     public GameObject firstTrackPrefab;
     public GameObject secondTrackPrefab;
+    public GameObject thirdTrackPrefab;
     public DriverController player;
     public GameObject redCar;
     public GameObject purpleCar;
@@ -40,6 +41,10 @@ public class GameController : MonoBehaviour
             }
             case 1: {
                 this.currentTrack = Instantiate(this.secondTrackPrefab, this.transform.parent).GetComponent<TrackController>();
+                break;
+            }
+            case 2: {
+                this.currentTrack = Instantiate(this.thirdTrackPrefab, this.transform.parent).GetComponent<TrackController>();
                 break;
             }
         }
@@ -159,6 +164,14 @@ public class GameController : MonoBehaviour
 
         this.mainCamera.Follow = this.player.transform;
         this.player.driverName = PersistentDataController.shared.userName;
+
+        var enemyLives = PersistentDataController.shared.currentTrack + 1;
+        this.redCar.GetComponent<DriverController>().lives = enemyLives;
+        this.purpleCar.GetComponent<DriverController>().lives = enemyLives;
+        this.blueCar.GetComponent<DriverController>().lives = enemyLives;
+        this.greenCar.GetComponent<DriverController>().lives = enemyLives;
+
+        this.player.lives = PersistentDataController.shared.maxLives;
     }
 
     public void fight(DriverController enemy)
@@ -174,6 +187,11 @@ public class GameController : MonoBehaviour
 
     public void fightFinished(bool youWin)
     {
+        if (youWin)
+        {
+            PersistentDataController.shared.experience += 800;
+        }
+
         this.isFighting = false;
     }
 
@@ -184,18 +202,36 @@ public class GameController : MonoBehaviour
 
     public void enemyDied(string id)
     {
+        if (PersistentDataController.shared.currentTrack != 0)
+        {
+            PersistentDataController.shared.experience += 1000;
+        }
+
         this.currentTrack.enemyDied(id);
     }
 
     public void playerCompletedLap(int currentLap)
     {
         this.raceUICanvas.updateLaps(currentLap, this.currentTrack.laps);
-        
+
+        var positions = this.currentTrack.sortedPositions;
+        var playerPosition = 0;
+        for (int i = 0; i < positions.Count; i++)
+        {
+            if (this.player.id == positions[i].Item5)
+            {
+                playerPosition = i;
+                break;
+            }
+        }
+        PersistentDataController.shared.experience += this.experienceForLap(playerPosition);
+
         if (currentLap == this.currentTrack.laps)
         {
             this.raceStarted = false;
-            this.raceFinishedCanvas.addPosition(this.player.driverName, this.currentTrack.sortedPositions);
+            this.raceFinishedCanvas.addPosition(this.player.driverName, positions);
             this.raceFinishedCanvas.gameObject.SetActive(true);
+            PersistentDataController.shared.experience += this.experienceForRace(playerPosition);
         }
     }
 
@@ -207,6 +243,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void raceAgain()
+    {
+        this.sceneManager.goToPreviousScene();
+    }
+
     public void raceFinished()
     {
         if (PersistentDataController.shared.currentTrack < 2)
@@ -215,7 +256,24 @@ public class GameController : MonoBehaviour
         }
         else 
         {
+            PersistentDataController.shared.experience += 3000;
             this.sceneManager.goToPreviousScene();
         }
+    }
+
+    private int experienceForLap(int position)
+    {
+        var exponent = 2.2f;
+        var baseXP = 300;
+        var factor = 13;
+        return Mathf.FloorToInt(baseXP - factor * (Mathf.Pow(position, exponent)));
+    }
+
+    private int experienceForRace(int position)
+    {
+        var exponent = 3.1f;
+        var baseXP = 2000;
+        var factor = 12.5f;
+        return Mathf.FloorToInt(baseXP - factor * (Mathf.Pow(position, exponent)));
     }
 }

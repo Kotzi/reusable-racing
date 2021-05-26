@@ -6,6 +6,8 @@ public class PersistentDataController: MonoBehaviour
 
     public string userName = null;
     public int level = 1;
+    public int experience = 0;
+    public int maxLives = 1;
     public int currentTrack = -1;
     public int car = 0;
 

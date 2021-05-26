@@ -10,7 +10,7 @@ public class RaceFinishedCanvasController : MonoBehaviour
 
     private List<string> positions = new List<string>();
 
-    public void addPosition(string name, List<(string, int, int, float)> fillWith)
+    public void addPosition(string name, List<(string, int, int, float, string)> fillWith)
     {
         this.positions.Add(name);
 
@@ -35,7 +35,6 @@ public class RaceFinishedCanvasController : MonoBehaviour
 
     public void onContinueButtonClicked()
     {
-        PersistentDataController.shared.level += 1;
         this.gameController.raceFinished();
     }
 }

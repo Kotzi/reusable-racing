@@ -427,7 +427,7 @@ MonoBehaviour:
   - {fileID: 1588917934593731365}
   - {fileID: 6324041136804470892}
   - {fileID: 3004283637414693571}
-  laps: 1
+  laps: 3
 --- !u!1 &4369538334306192830
 GameObject:
   m_ObjectHideFlags: 0

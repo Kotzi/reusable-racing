@@ -18,13 +18,20 @@ public class FightCanvasController: MonoBehaviour
     public TMP_Text titleText;
     public Image enemyImage;
     public TMP_Text enemyNameText;
+    public TMP_Text enemyLivesText;
     public TMP_Text enemyDamageText;
     public Slider enemyHealthSlider;
     public Image playerImage;
     public TMP_Text playerNameText;
+    public TMP_Text playerLivesText;
+    public TMP_Text playerLevelText;
     public TMP_Text playerDamageText;
     public Slider playerHealthSlider;
     public Slider playerTimeSlider;
+    public Image bagImageCover;
+    public Image razorImageCover;
+    public Image strawImageCover;
+    public CanvasRenderer playerDiedCanvas;
 
     private GameController gameController;
     private DriverController enemy;
@@ -33,11 +40,32 @@ public class FightCanvasController: MonoBehaviour
     private float enemyAttackCooldown = ENEMY_MAX_COOLDOWN;
     private Sequence enemyHealthChangedSequence;
     private Sequence playerHealthChangedSequence;
+    private bool battleActive = true;
 
     void Start()
     {
         this.enemyDamageText.text = "";
         this.playerDamageText.text = "";
+
+        if (PersistentDataController.shared.level >= 4)
+        {
+            Destroy(this.bagImageCover.gameObject);
+        }
+        
+        if (PersistentDataController.shared.level >= 3)
+        {
+            Destroy(this.razorImageCover.gameObject);
+        }
+        
+        if (PersistentDataController.shared.level >= 2)
+        {
+            Destroy(this.strawImageCover.gameObject);
+        }
+
+        this.enemyLivesText.text = "Lives: " + this.enemy.lives;
+
+        this.playerLivesText.text = "Lives: " + this.player.lives;
+        this.playerLevelText.text = "Level: " + PersistentDataController.shared.level;
 
         this.enemyHealthChangedSequence = DOTween.Sequence()
                 .SetAutoKill(false)
@@ -66,14 +94,17 @@ public class FightCanvasController: MonoBehaviour
 
     void Update()
     {
-        this.playerWait += Time.deltaTime;
-        this.playerTimeSlider.value = Mathf.Clamp01(this.playerWait);
-
-        this.enemyAttackCooldown -= Time.deltaTime;
-        if (this.enemyAttackCooldown <= 0)
+        if (this.battleActive)
         {
-            this.attackPlayer(Mathf.RoundToInt(10 * Random.Range(1f, 1.5f)), Random.Range(0.7f, 1f));
-            this.enemyAttackCooldown = ENEMY_MAX_COOLDOWN;
+            this.playerWait += Time.deltaTime;
+            this.playerTimeSlider.value = Mathf.Clamp01(this.playerWait);
+
+            this.enemyAttackCooldown -= Time.deltaTime;
+            if (this.enemyAttackCooldown <= 0)
+            {
+                this.attackPlayer(Mathf.RoundToInt(10 * Random.Range(1f, 1.5f)), Random.Range(0.7f, 1f));
+                this.enemyAttackCooldown = ENEMY_MAX_COOLDOWN;
+            }
         }
     }
 
@@ -84,11 +115,13 @@ public class FightCanvasController: MonoBehaviour
         this.enemy = enemy;
         this.enemyNameText.text = enemy.driverName;
         this.enemyImage.sprite = enemy.getSprite();
+        this.enemyHealthSlider.value = enemy.healthPercentage();
         this.enemyImage.transform.DOShakePosition(0.25f, 3f, 15).SetLoops(-1);
 
         this.player = player;
         this.playerNameText.text = player.driverName;
         this.playerImage.sprite = player.getSprite();
+        this.playerHealthSlider.value = player.healthPercentage();
         this.playerImage.transform.DOShakePosition(0.25f, 3f, 15).SetLoops(-1);
 
         DOTween.Sequence()
@@ -117,6 +150,11 @@ public class FightCanvasController: MonoBehaviour
     public void chopsticksAttack()
     {
         this.attackEnemy(CHOPSTICKS_DAMAGE, CHOPSTICKS_ACCURACY);
+    }
+
+    public void raceAgainButtonClicked()
+    {
+        this.gameController.raceAgain();
     }
 
     void attackEnemy(int damage, float accuracy)
@@ -176,9 +214,17 @@ public class FightCanvasController: MonoBehaviour
 
     void finishFight(bool youWon)
     {
-        this.enemy.fightFinished(!youWon);
-        this.player.fightFinished(youWon);
-        this.gameController.fightFinished(youWon);
-        Destroy(this.transform.gameObject.GetComponentInParent<Canvas>().gameObject);
+        if (youWon || this.player.lives > 0)
+        {
+            this.enemy.fightFinished(!youWon);
+            this.player.fightFinished(youWon);
+            this.gameController.fightFinished(youWon);
+            Destroy(this.transform.gameObject.GetComponentInParent<Canvas>().gameObject);
+        }
+        else 
+        {
+            this.battleActive = false;
+            this.playerDiedCanvas.gameObject.SetActive(true);
+        }
     }
 }

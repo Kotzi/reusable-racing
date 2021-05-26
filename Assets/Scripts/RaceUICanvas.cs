@@ -40,7 +40,7 @@ public class RaceUICanvas : MonoBehaviour
                 });
     }
 
-    public void updatePositions(List<(string, int, int, float)> positions)
+    public void updatePositions(List<(string, int, int, float, string)> positions)
     {
         var text = "";
         foreach (var p in positions)
