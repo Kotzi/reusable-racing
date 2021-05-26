@@ -28,9 +28,13 @@ public class FightCanvasController: MonoBehaviour
     public TMP_Text playerDamageText;
     public Slider playerHealthSlider;
     public Slider playerTimeSlider;
+    public Image bagImage;
     public Image bagImageCover;
+    public Image razorImage;
     public Image razorImageCover;
+    public Image strawImage;
     public Image strawImageCover;
+    public Image chopsticksImage;
     public CanvasRenderer playerDiedCanvas;
 
     private GameController gameController;
@@ -161,15 +165,26 @@ public class FightCanvasController: MonoBehaviour
     {
         if (this.playerWait >= 1f)
         {
-            this.playerImage.transform.DOPunchPosition(new Vector2(20f, 20f), 0.25f);
+            this.playerImage.transform.DOPunchPosition(new Vector2(-20f, 20f), 0.25f);
             this.playerWait = 0f;
             this.playerTimeSlider.value = 0f;
 
             if (Random.value <= accuracy)
             {
+                var critical = false;
+                if (Random.value >= 0.9)
+                {
+                    damage *= 2;
+                    critical = true;
+                }
+
                 this.enemy.takeDamage(damage);
 
                 this.enemyDamageText.text = damage.ToString();
+                if (critical)
+                {
+                    this.enemyDamageText.text += "\nCRITICAL!";
+                }
 
                 this.enemyHealthSlider.DOValue(this.enemy.healthPercentage(), 0.25f);
 
@@ -189,13 +204,24 @@ public class FightCanvasController: MonoBehaviour
 
     void attackPlayer(int damage, float accuracy)
     {
-        this.enemyImage.transform.DOPunchPosition(new Vector2(-20f, -20f), 0.25f);
+        this.enemyImage.transform.DOPunchPosition(new Vector2(20f, 20f), 0.25f);
 
         if (Random.value <= accuracy)
         {
+            var critical = false;
+            if (Random.value >= 0.9)
+            {
+                damage *= 2;
+                critical = true;
+            }
+            
             this.player.takeDamage(damage);
 
             this.playerDamageText.text = damage.ToString();
+            if (critical)
+            {
+                this.playerDamageText.text += "\nCRITICAL!";
+            }
 
             this.playerHealthSlider.DOValue(this.player.healthPercentage(), 0.25f);
 
