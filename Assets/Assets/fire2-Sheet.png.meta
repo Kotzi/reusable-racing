@@ -1,34 +1,25 @@
 fileFormatVersion: 2
-guid: 0d34f04adbd834043957fc3d076b1770
+guid: 7dee44cb805344c52937b036ca19aa09
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3381517969227531074
-    second: FIRE-Sheet_0
+      213: 2726525411092645835
+    second: fire2-Sheet_0
   - first:
-      213: -6512574087982932652
-    second: FIRE-Sheet_1
+      213: 4534098012085394970
+    second: fire2-Sheet_1
   - first:
-      213: -1255218368960210644
-    second: FIRE-Sheet_2
+      213: 7918602451975093152
+    second: fire2-Sheet_2
   - first:
-      213: 633113779143482117
-    second: FIRE-Sheet_3
+      213: -8688836048169329276
+    second: fire2-Sheet_3
   - first:
-      213: 21726633486806210
-    second: FIRE-Sheet_4
+      213: -3386652174159301745
+    second: fire2-Sheet_4
   - first:
-      213: -3051952790499673252
-    second: FIRE-Sheet_5
-  - first:
-      213: 3405082607386198588
-    second: FIRE-Sheet_6
-  - first:
-      213: -4863580314002345531
-    second: FIRE-Sheet_7
-  - first:
-      213: 3283873624739450267
-    second: FIRE-Sheet_8
+      213: -7779179212037078702
+    second: fire2-Sheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FIRE-Sheet_0
+      name: fire2-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -144,14 +135,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 243486d4da09dee20800000000000000
-      internalID: 3381517969227531074
+      spriteID: bc7c0476a6096d520800000000000000
+      internalID: 2726525411092645835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIRE-Sheet_1
+      name: fire2-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -165,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45d1d504f50be95a0800000000000000
-      internalID: -6512574087982932652
+      spriteID: a1e972b8e1a5cee30800000000000000
+      internalID: 4534098012085394970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIRE-Sheet_2
+      name: fire2-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -186,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c29d49a3b81949ee0800000000000000
-      internalID: -1255218368960210644
+      spriteID: 0ab338bb9f684ed60800000000000000
+      internalID: 7918602451975093152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIRE-Sheet_3
+      name: fire2-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -207,14 +198,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50b9044b0a549c800800000000000000
-      internalID: 633113779143482117
+      spriteID: 48d124d46ad0b6780800000000000000
+      internalID: -8688836048169329276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIRE-Sheet_4
+      name: fire2-Sheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -228,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cc652f02403d4000800000000000000
-      internalID: 21726633486806210
+      spriteID: f833e657ac13001d0800000000000000
+      internalID: -3386652174159301745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FIRE-Sheet_5
+      name: fire2-Sheet_5
       rect:
         serializedVersion: 2
         x: 160
@@ -249,71 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5b31036b1945a5d0800000000000000
-      internalID: -3051952790499673252
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FIRE-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c328d1c2798414f20800000000000000
-      internalID: 3405082607386198588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FIRE-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c1be470977118cb0800000000000000
-      internalID: -4863580314002345531
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FIRE-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9d8ed9b9a9a29d20800000000000000
-      internalID: 3283873624739450267
+      spriteID: 2514d66f8bdca0490800000000000000
+      internalID: -7779179212037078702
       vertices: []
       indices: 
       edges: []
