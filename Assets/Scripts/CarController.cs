@@ -4,9 +4,13 @@ using DG.Tweening;
 
 public class CarController: MonoBehaviour
 {
+    const float MIN_PITCH = 0.05f;
+
     public Waypoint[] waypoints = null;
+    public AudioSource engineAudio;
     public int nextWaypoint { get; private set; } = 0;
     public float distanceToNextWaypoint { get; private set; } = 0f;
+    public float maxSpeed = 0f;
 
     internal Rigidbody2D rb;
     internal GameController gameController;
@@ -17,6 +21,7 @@ public class CarController: MonoBehaviour
     private DriverController driver;
     private ParticleSystem dustParticles;
     private Collider2D mainCollider;
+    private float audioPitch = 0f;
 
 	void Awake() 
     {
@@ -57,12 +62,22 @@ public class CarController: MonoBehaviour
             }
 
             this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
+
+            if(this.audioPitch < MIN_PITCH)
+            {
+                this.engineAudio.pitch = MIN_PITCH;
+            }
+            else
+            {
+                this.engineAudio.pitch = this.audioPitch;
+            }
         }
     }
 
     void LateUpdate()
     {
         this.dustParticles.gameObject.SetActive(this.rb.velocity != Vector2.zero);
+        this.audioPitch = (this.rb.velocity.magnitude * 3.6f) / this.maxSpeed;
     }
 
     public bool shouldGetNewLap()

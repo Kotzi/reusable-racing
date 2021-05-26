@@ -9,6 +9,11 @@ public class PlayerCarController: CarController
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
  	const float MAX_STICKY_VELOCITY = 1.5f;
 
+    void Start()
+    {
+        this.maxSpeed = MAX_SPEED;
+    }
+
 	void FixedUpdate () 
     {
         if (this.gameController.carsCanMove())
@@ -23,9 +28,9 @@ public class PlayerCarController: CarController
             this.rb.velocity = this.getForwardVelocity() + rightVelocity * driftFactor;
 
             float speed = this.rb.velocity.magnitude;
-            if (speed > MAX_SPEED)
+            if (speed > this.maxSpeed)
             {
-                float brakeSpeed = speed - MAX_SPEED;
+                float brakeSpeed = speed - this.maxSpeed;
             
                 Vector3 normalisedVelocity = this.rb.velocity.normalized;
                 Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
