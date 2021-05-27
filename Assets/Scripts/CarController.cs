@@ -76,10 +76,6 @@ public class CarController: MonoBehaviour
                 this.nextWaypoint = 0;
             }
 
-            print(this.audioPitch);
-            //print(this.maxSpeed);
-            print(this.audioFactor);
-            //print(this.rb.velocity.magnitude);
             if(this.audioPitch < MIN_PITCH)
             {
                 this.engineAudio.pitch = MIN_PITCH;

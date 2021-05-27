@@ -27,7 +27,7 @@ public class IntroCanvasController : MonoBehaviour
             persistentDataController.AddComponent<PersistentDataController>();
         }
 
-        this.sceneManagerController.currentSceneIndex = 1;
+        this.sceneManagerController.currentSceneIndex = 2;
         PersistentDataController.shared.currentTrack = -1;
 
         if (PersistentDataController.shared.userName == null) 

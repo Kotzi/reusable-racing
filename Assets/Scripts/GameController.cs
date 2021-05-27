@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject greenCar; 
     public RaceUICanvas raceUICanvas;
     public RaceFinishedCanvasController raceFinishedCanvas;
+    public PauseCanvasController pauseCanvas;
     public TrackController currentTrack;
     public CinemachineVirtualCamera mainCamera;
     public SceneManagerController sceneManager;
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        this.sceneManager.currentSceneIndex = 2;
+        this.sceneManager.currentSceneIndex = 3;
 
         if(PersistentDataController.shared == null)
         {
@@ -177,6 +178,21 @@ public class GameController : MonoBehaviour
         this.player.lives = PersistentDataController.shared.maxLives;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Time.timeScale == 0f)
+            {
+                this.unpauseGame();
+            }
+            else 
+            {
+                this.pauseGame();
+            }
+        }
+    }
+
     public void fight(DriverController enemy)
     {
         if (!this.isFighting)
@@ -278,5 +294,17 @@ public class GameController : MonoBehaviour
         var baseXP = 2000;
         var factor = 12.5f;
         return Mathf.FloorToInt(baseXP - factor * (Mathf.Pow(position, exponent)));
+    }
+
+    private void pauseGame()
+    {
+        Time.timeScale = 0f;
+        this.pauseCanvas.gameObject.SetActive(true);
+    }
+
+    private void unpauseGame()
+    {
+        Time.timeScale = 1f;
+        this.pauseCanvas.gameObject.SetActive(false);
     }
 }
