@@ -12,6 +12,10 @@ PrefabInstance:
       value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: healthModifier
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
       propertyPath: torqueModifier
       value: 1.25
       objectReference: {fileID: 0}

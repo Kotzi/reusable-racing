@@ -221,12 +221,16 @@ public class GameController : MonoBehaviour
 
     public void enemyDied(string id)
     {
-        if (PersistentDataController.shared.currentTrack != 0)
+        // This is awful but I just found out this and requires a really quick fix
+        if (this.player.id != id) 
         {
-            PersistentDataController.shared.experience += 1000;
-        }
+            if (PersistentDataController.shared.currentTrack != 0)
+            {
+                PersistentDataController.shared.experience += 1000;
+            }
 
-        this.currentTrack.enemyDied(id);
+            this.currentTrack.enemyDied(id);
+        }
     }
 
     public void playerCompletedLap(int currentLap)

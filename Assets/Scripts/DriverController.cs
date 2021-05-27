@@ -7,16 +7,19 @@ public class DriverController: MonoBehaviour
     public string id = System.Guid.NewGuid().ToString();
     public string driverName = "name";
     public CarController car { get; private set; }
+    public GameObject explosion;
     public int lives = 3;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-    private int health = MAX_LIFE;
+    private float maxHealth = MAX_LIFE;
+    private float health = MAX_LIFE;
 
     void Awake()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.rb = this.GetComponent<Rigidbody2D>();
+        this.maxHealth = this.GetComponent<CarProperties>().healthModifier * MAX_LIFE;
     }
 
     void Start()
@@ -47,7 +50,7 @@ public class DriverController: MonoBehaviour
 
     public float healthPercentage()
     {
-        return (float)this.health / (float)MAX_LIFE;
+        return this.health / this.maxHealth;
     }
 
     public bool isAlive()
@@ -61,12 +64,13 @@ public class DriverController: MonoBehaviour
 
         if (this.lives <= 0)
         {
+            this.car.isAlive = false;
             this.car.gameController.enemyDied(this.id);
-            Destroy(this.gameObject);
+            this.explosion.SetActive(true);
+            Destroy(this.gameObject, 0.9f);
         }
         else if (this.health <= 0)
         {
-
             this.health = MAX_LIFE;
         }
     }

@@ -13,6 +13,7 @@ public class CarController: MonoBehaviour
     public float maxSpeed = 0f;
     public float speedForce = 0f;
     public float torqueForce = 0f;
+    public bool isAlive = true;
 
     internal Rigidbody2D rb;
     internal GameController gameController;
@@ -43,7 +44,7 @@ public class CarController: MonoBehaviour
 
     void Update()
     {
-        if (this.waypoints != null)
+        if (this.isAlive && this.waypoints != null)
         {
             if (this.nextWaypoint < this.waypoints.Length - 1)
             {

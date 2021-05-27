@@ -37,7 +37,6 @@ public class FightCanvasController: MonoBehaviour
     public Image strawImageCover;
     public Image chopsticksImage;
     public CanvasRenderer playerDiedCanvas;
-
     private GameController gameController;
     private DriverController enemy;
     private DriverController player;

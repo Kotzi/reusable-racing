@@ -1915,6 +1915,8 @@ MonoBehaviour:
   strawImageCover: {fileID: 4891517909164847755}
   chopsticksImage: {fileID: 3136421675075783587}
   playerDiedCanvas: {fileID: 1495362317835980986}
+  playerExplosion: {fileID: 0}
+  enemyExplosion: {fileID: 0}
 --- !u!1 &3870788677023197075
 GameObject:
   m_ObjectHideFlags: 0
