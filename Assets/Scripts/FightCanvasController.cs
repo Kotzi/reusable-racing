@@ -45,6 +45,8 @@ public class FightCanvasController: MonoBehaviour
     private Sequence enemyHealthChangedSequence;
     private Sequence playerHealthChangedSequence;
     private bool battleActive = true;
+    private float playerAttackMultiplier = 1f;
+    private float enemyAttackMultiplier = 1f;
 
     void Start()
     {
@@ -94,6 +96,9 @@ public class FightCanvasController: MonoBehaviour
             this.playerDamageText.text = "";
             this.playerHealthChangedSequence.Rewind();
         });
+
+        this.playerAttackMultiplier = this.player.GetComponent<CarProperties>().attackModifier;
+        this.enemyAttackMultiplier = this.enemy.GetComponent<CarProperties>().attackModifier;
     }
 
     void Update()
@@ -178,6 +183,8 @@ public class FightCanvasController: MonoBehaviour
                     critical = true;
                 }
 
+                damage = Mathf.RoundToInt((float)damage * this.playerAttackMultiplier);
+
                 this.enemy.takeDamage(damage);
 
                 this.enemyDamageText.text = damage.ToString();
@@ -215,6 +222,8 @@ public class FightCanvasController: MonoBehaviour
                 critical = true;
             }
             
+            damage = Mathf.RoundToInt((float)damage * this.enemyAttackMultiplier);
+
             this.player.takeDamage(damage);
 
             this.playerDamageText.text = damage.ToString();
@@ -242,7 +251,7 @@ public class FightCanvasController: MonoBehaviour
     {
         this.battleActive = false;
         
-        this.resultText.text = youWon ? LanguageController.Shared.getYouWonText() : LanguageController.Shared.getYouLostText();
+        this.resultText.text = youWon ? LanguageController.shared.getYouWonText() : LanguageController.shared.getYouLostText();
         this.resultText.gameObject.SetActive(true);
 
         DOTween.Sequence()

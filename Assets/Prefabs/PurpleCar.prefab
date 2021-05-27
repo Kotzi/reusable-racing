@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: attackModifier
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
       propertyPath: healthModifier
       value: 1.1
       objectReference: {fileID: 0}

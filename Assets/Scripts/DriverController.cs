@@ -20,6 +20,7 @@ public class DriverController: MonoBehaviour
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.rb = this.GetComponent<Rigidbody2D>();
         this.maxHealth = this.GetComponent<CarProperties>().healthModifier * MAX_LIFE;
+        this.health = this.maxHealth;
     }
 
     void Start()

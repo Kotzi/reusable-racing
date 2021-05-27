@@ -8,7 +8,7 @@ class LanguageController : MonoBehaviour {
     }
 
     private static LanguageController _instance;
-    public static LanguageController Shared {
+    public static LanguageController shared {
         get {
             if (_instance != null) {
                 return _instance;
@@ -59,6 +59,23 @@ class LanguageController : MonoBehaviour {
         {
             case Language.EN: return "You lost!";
             case Language.ES: return "Perdiste!";
+        }
+
+        return "";
+    }
+
+    public string getIntroText()
+    {
+        switch (this.currentLanguage) 
+        {
+            case Language.EN: return 
+@"The Earth is suffering a lot from all the usage of that plastic that humans did in the past. 
+<i>Nobody is gonna get hurt from using this plastic fork</i>, they said.
+Now, on this arid wasteland, some cars found a <i>spark</i> of joy on their mechanical lives: racing and hitting themselves using reusable items (because they are nice folks, of course). 
+There's even a misterious one who claims to be the trully leader, master and king of the <b>Reusable Cup</b>.
+Could you beat them?";
+            case Language.ES: return 
+@"The Earth is suffering a lot from all the usage of that plastic that humans did in the past. ";
         }
 
         return "";

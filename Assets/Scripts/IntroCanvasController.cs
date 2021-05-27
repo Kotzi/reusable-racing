@@ -17,10 +17,14 @@ public class IntroCanvasController : MonoBehaviour
     public TMP_Text experienceAmountText;
     public TMP_Text experienceLevelText;
     public TMP_Text experienceCongratsText;
+    public CanvasRenderer introPanel;
+    public TMP_Text introPanelText;
     public SceneManagerController sceneManagerController;
 
     void Awake()
     {
+        this.introPanelText.text = LanguageController.shared.getIntroText();
+
         if(PersistentDataController.shared == null)
         {
             var persistentDataController = new GameObject("PersistentDataController");
@@ -32,12 +36,14 @@ public class IntroCanvasController : MonoBehaviour
 
         if (PersistentDataController.shared.userName == null) 
         {
-            this.namePanel.gameObject.SetActive(true);
+            this.introPanel.gameObject.SetActive(true);
+            this.namePanel.gameObject.SetActive(false);
             this.carPanel.gameObject.SetActive(false);
             this.experiencePanel.gameObject.SetActive(false);
         }
         else
         {
+            this.introPanel.gameObject.SetActive(false);
             this.namePanel.gameObject.SetActive(false);
             this.carPanel.gameObject.SetActive(false);
             this.experiencePanel.gameObject.SetActive(true);
@@ -55,6 +61,12 @@ public class IntroCanvasController : MonoBehaviour
                 this.experienceLevelText.text = "";
             }
         }
+    }
+
+    public void oIntroContinueButtonClicked()
+    {
+        this.introPanel.gameObject.SetActive(false);
+        this.namePanel.gameObject.SetActive(true);
     }
 
     public void onNameContinueButtonClicked()

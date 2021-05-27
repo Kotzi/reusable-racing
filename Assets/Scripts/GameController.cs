@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using System.Linq;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class GameController : MonoBehaviour
     public GameObject firstTrackPrefab;
     public GameObject secondTrackPrefab;
     public GameObject thirdTrackPrefab;
+    public GameObject lastTrackPrefab;
+    public GameObject youWonGame;
+    public TMP_Text youWonText;
+    public TMP_Text youWonButtonText;
     public DriverController player;
     public GameObject redCar;
     public GameObject purpleCar;
@@ -35,7 +40,6 @@ public class GameController : MonoBehaviour
         }
 
         PersistentDataController.shared.currentTrack += 1;
-
         switch (PersistentDataController.shared.currentTrack)
         {
             case 0: {
@@ -48,6 +52,12 @@ public class GameController : MonoBehaviour
             }
             case 2: {
                 this.currentTrack = Instantiate(this.thirdTrackPrefab, this.transform.parent).GetComponent<TrackController>();
+                break;
+            }
+            case 3: {
+                this.currentTrack = Instantiate(this.lastTrackPrefab, this.transform.parent).GetComponent<TrackController>();
+                this.raceUICanvas.gameObject.SetActive(false);
+                this.raceStarted = true;
                 break;
             }
         }
@@ -231,6 +241,11 @@ public class GameController : MonoBehaviour
 
             this.currentTrack.enemyDied(id);
         }
+
+        if (PersistentDataController.shared.currentTrack == 3) 
+        {
+            this.youWonGame.SetActive(true);
+        }
     }
 
     public void playerCompletedLap(int currentLap)
@@ -273,7 +288,7 @@ public class GameController : MonoBehaviour
 
     public void raceFinished()
     {
-        if (PersistentDataController.shared.currentTrack < 2)
+        if (PersistentDataController.shared.currentTrack < 3)
         {
             this.sceneManager.reloadCurrentScene();
         }
@@ -282,6 +297,12 @@ public class GameController : MonoBehaviour
             PersistentDataController.shared.experience += 3000;
             this.sceneManager.goToPreviousScene();
         }
+    }
+
+    public void restartFromYouWonClicked()
+    {
+        PersistentDataController.shared.experience += 10000;
+        this.sceneManager.goToPreviousScene();
     }
 
     private int experienceForLap(int position)

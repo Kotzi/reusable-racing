@@ -14,7 +14,7 @@ public class MainMenuController : MonoBehaviour
         SoundButton.AudioController = GetComponent<AudioController>();
         SceneManagerController = Object.FindObjectOfType<SceneManagerController>();
         SceneManagerController.currentSceneIndex = 1;
-        LanguageController = LanguageController.Shared;
+        LanguageController = LanguageController.shared;
         this.reloadTexts();
     }
 
