@@ -4,6 +4,8 @@ using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
+    public TMP_Text jamText;
+    public TMP_Text genresText;
     public TMP_Text StartButtonText;
     public SoundButton SoundButton;
     private LanguageController LanguageController;
