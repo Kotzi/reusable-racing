@@ -10,6 +10,7 @@ public class PersistentDataController: MonoBehaviour
     public int maxLives = 1;
     public int currentTrack = -1;
     public int car = 0;
+    public bool wonTrophy = false;
 
     void Awake()
     {

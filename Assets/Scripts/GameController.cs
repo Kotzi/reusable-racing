@@ -302,6 +302,7 @@ public class GameController : MonoBehaviour
     public void restartFromYouWonClicked()
     {
         PersistentDataController.shared.experience += 10000;
+        PersistentDataController.shared.wonTrophy = true;
         this.sceneManager.goToPreviousScene();
     }
 

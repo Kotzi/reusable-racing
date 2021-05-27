@@ -19,6 +19,8 @@ public class IntroCanvasController : MonoBehaviour
     public TMP_Text experienceCongratsText;
     public CanvasRenderer introPanel;
     public TMP_Text introPanelText;
+    public Image trophyImage;
+    public TMP_Text trophyText;
     public SceneManagerController sceneManagerController;
 
     void Awake()
@@ -47,6 +49,8 @@ public class IntroCanvasController : MonoBehaviour
             this.namePanel.gameObject.SetActive(false);
             this.carPanel.gameObject.SetActive(false);
             this.experiencePanel.gameObject.SetActive(true);
+
+            this.trophyImage.gameObject.SetActive(PersistentDataController.shared.wonTrophy);
 
             this.carTitleText.text = $"Hello {PersistentDataController.shared.userName}, what would you like to drive today?";
 
@@ -111,6 +115,7 @@ public class IntroCanvasController : MonoBehaviour
     private void pickCar(int car)
     {
         PersistentDataController.shared.car = car;
+        PersistentDataController.shared.wonTrophy = false;
         this.sceneManagerController.goToNextScene();
     }
 
