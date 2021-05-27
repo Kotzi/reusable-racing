@@ -16,6 +16,7 @@ public class FightCanvasController: MonoBehaviour
     const float ENEMY_MAX_COOLDOWN = 2f;
 
     public TMP_Text titleText;
+    public TMP_Text resultText;
     public Image enemyImage;
     public TMP_Text enemyNameText;
     public TMP_Text enemyLivesText;
@@ -240,17 +241,26 @@ public class FightCanvasController: MonoBehaviour
 
     void finishFight(bool youWon)
     {
-        if (youWon || this.player.lives > 0)
-        {
-            this.enemy.fightFinished(!youWon);
-            this.player.fightFinished(youWon);
-            this.gameController.fightFinished(youWon);
-            Destroy(this.transform.gameObject.GetComponentInParent<Canvas>().gameObject);
-        }
-        else 
-        {
-            this.battleActive = false;
-            this.playerDiedCanvas.gameObject.SetActive(true);
-        }
+        this.battleActive = false;
+        
+        this.resultText.text = youWon ? LanguageController.Shared.getYouWonText() : LanguageController.Shared.getYouLostText();
+        this.resultText.gameObject.SetActive(true);
+
+        DOTween.Sequence()
+                .Join(this.resultText.transform.DOScale(Vector3.one * 3f, 0.3f))
+                .Join(this.resultText.DOFade(0.5f, 0.3f))
+                .OnComplete(() => {
+                    if (youWon || this.player.lives > 0)
+                    {
+                        this.enemy.fightFinished(!youWon);
+                        this.player.fightFinished(youWon);
+                        this.gameController.fightFinished(youWon);
+                        Destroy(this.transform.gameObject.GetComponentInParent<Canvas>().gameObject);
+                    }
+                    else 
+                    {
+                        this.playerDiedCanvas.gameObject.SetActive(true);
+                    }
+                });
     }
 }
