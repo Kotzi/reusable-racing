@@ -11,6 +11,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: speedModifier
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: torqueModifier
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787153885300222399, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: accelerationModifier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5139156631269148455, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -67,6 +79,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: bdd22122e43244e9e9ef957f2d57eabb, type: 3}
+    - target: {fileID: 6986999914955846337, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7483773569161365984, guid: 2ac88eb3bdbb74149aed04c574fb1ed0, type: 3}
       propertyPath: m_Name
       value: RedCar

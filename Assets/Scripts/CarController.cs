@@ -11,6 +11,8 @@ public class CarController: MonoBehaviour
     public int nextWaypoint { get; private set; } = 0;
     public float distanceToNextWaypoint { get; private set; } = 0f;
     public float maxSpeed = 0f;
+    public float speedForce = 0f;
+    public float torqueForce = 0f;
 
     internal Rigidbody2D rb;
     internal GameController gameController;

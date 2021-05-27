@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: -3173641652568661438}
   - component: {fileID: 4128986375817628941}
   - component: {fileID: 3536636381771200623}
+  - component: {fileID: 4787153885300222399}
   m_Layer: 7
   m_Name: Car
   m_TagString: Untagged
@@ -359,6 +360,21 @@ MonoBehaviour:
   id: e40a32fd-5e60-4312-9e70-2817f6c0942e
   driverName: Enemy
   lives: 3
+--- !u!114 &4787153885300222399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483773569161365984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f7f8440426e47b99c79abab05b5852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelerationModifier: 1
+  speedModifier: 1
+  torqueModifier: 1
 --- !u!1001 &3546163251689140925
 PrefabInstance:
   m_ObjectHideFlags: 0

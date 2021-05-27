@@ -12,7 +12,11 @@ public class PlayerCarController: CarController
     public override void Awake()
     {
         base.Awake();
-        this.maxSpeed = MAX_SPEED;
+
+        var carProperties = this.GetComponent<CarProperties>();
+        this.maxSpeed = MAX_SPEED * carProperties.speedModifier;
+        this.speedForce = SPEED_FORCE * carProperties.accelerationModifier;
+        this.torqueForce = TORQUE_FORCE * carProperties.torqueModifier;
     }
 
 	void FixedUpdate () 
@@ -40,15 +44,15 @@ public class PlayerCarController: CarController
             } 
             else if(Input.GetButton("Gas")) 
             {
-                this.rb.AddForce(this.transform.up * (SPEED_FORCE + this.turbo));
+                this.rb.AddForce(this.transform.up * (this.speedForce + this.turbo));
             }
 
             if(Input.GetButton("Brake")) 
             {
-                this.rb.AddForce(this.transform.up * -SPEED_FORCE/2f);
+                this.rb.AddForce(this.transform.up * -this.speedForce/2f);
             }
 
-            float tf = Mathf.Lerp(0, TORQUE_FORCE, this.rb.velocity.magnitude / 2);
+            float tf = Mathf.Lerp(0, this.torqueForce, this.rb.velocity.magnitude / 2);
             this.rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
         }
         else

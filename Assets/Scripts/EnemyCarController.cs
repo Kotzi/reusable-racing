@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyCarController: CarController
 {
+    const float TORQUE_FORCE = 100f;
     const float SPEED_FORCE = 10f;
     const float MAX_SPEED = 5f;
 
@@ -15,7 +16,11 @@ public class EnemyCarController: CarController
 
         this.driver = this.GetComponent<DriverController>();
         this.waypointTarget = this.nextWaypoint;
-        this.maxSpeed = MAX_SPEED;
+
+        var carProperties = this.GetComponent<CarProperties>();
+        this.maxSpeed = MAX_SPEED * carProperties.speedModifier;
+        this.speedForce = SPEED_FORCE * carProperties.accelerationModifier;
+        this.torqueForce = TORQUE_FORCE * carProperties.torqueModifier;
     }
     
 	void FixedUpdate() 
@@ -80,7 +85,7 @@ public class EnemyCarController: CarController
         }
         else
         {
-            this.rb.AddForce((target.position - transform.position).normalized * (10f + this.turbo));
+            this.rb.AddForce((target.position - transform.position).normalized * (this.speedForce + this.turbo));
         }
     }
 
@@ -91,8 +96,8 @@ public class EnemyCarController: CarController
         var angleDiff = Vector2.SignedAngle(direction, diffVector);
         var clampedDiff = Mathf.Clamp(
             angleDiff,
-            -100 * time,
-            100 * time
+            -this.torqueForce * time,
+            this.torqueForce * time
         );
 
         this.transform.rotation = Quaternion.AngleAxis(
