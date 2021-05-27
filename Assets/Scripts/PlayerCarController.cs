@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerCarController: CarController
 {
 	const float SPEED_FORCE = 10f;
-    const float MAX_SPEED = 5f;
-	const float TORQUE_FORCE = -100f;
+    const float MAX_SPEED = 7f;
+	const float TORQUE_FORCE = -120f;
 	const float DRIFT_FACTOR_STICKY = 0.4f;
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
  	const float MAX_STICKY_VELOCITY = 1.5f;
