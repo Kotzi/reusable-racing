@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurpleCar
       objectReference: {fileID: 0}
+    - target: {fileID: 5007373839738248497, guid: e20f45e018f634005858c9939ed8f1d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7347486629874406390, guid: e20f45e018f634005858c9939ed8f1d7, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -657,6 +661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueCar
       objectReference: {fileID: 0}
+    - target: {fileID: 3806696936832023823, guid: e3473fe4b3b034225b6a3563c8854f35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7069251555426520192, guid: e3473fe4b3b034225b6a3563c8854f35, type: 3}
       propertyPath: id
       value: 2a95ea20-4e6c-4ca9-b9ff-478754dc0d0b
@@ -824,6 +832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenCar
       objectReference: {fileID: 0}
+    - target: {fileID: 8816671920451794905, guid: e7e9d7ecb5b774a33b8f26233c13a77b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e9d7ecb5b774a33b8f26233c13a77b, type: 3}
 --- !u!1 &1782261806 stripped
@@ -860,7 +872,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4cea64e1b5d48428690b4519990e78ca, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class CarController: MonoBehaviour
 {
-    const float MIN_PITCH = 0.05f;
+    const float MIN_PITCH = 0.85f;
 
     public Waypoint[] waypoints = null;
     public AudioSource engineAudio;
@@ -22,8 +22,9 @@ public class CarController: MonoBehaviour
     private ParticleSystem dustParticles;
     private Collider2D mainCollider;
     private float audioPitch = 0f;
+    private float audioFactor = 0f;
 
-	void Awake() 
+	public virtual void Awake() 
     {
         this.rb = this.GetComponent<Rigidbody2D>();
         this.gameController = Object.FindObjectOfType<GameController>();
@@ -33,36 +34,52 @@ public class CarController: MonoBehaviour
         this.dustParticles = this.GetComponentInChildren<ParticleSystem>();
 	}
 
+    void Start()
+    {
+        this.audioFactor = (0.95f * Mathf.Pow(3.33f, 1.0f/this.maxSpeed));
+    }
+
     void Update()
     {
-        if (this.waypoints != null && this.nextWaypoint < this.waypoints.Length - 1)
+        if (this.waypoints != null)
         {
-            if (this.turbo > 0)
+            if (this.nextWaypoint < this.waypoints.Length - 1)
             {
-                this.turbo = Mathf.Lerp(this.turbo, 0, Time.deltaTime);
-            }
-
-            this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
-            if (this.distanceToNextWaypoint > 3f) 
-            {
-                this.forceUpdateWaypointIndex();
-            }
-            else if (this.waypoints[this.nextWaypoint].getBounds().Contains(this.transform.position))
-            {
-                if (this.nextWaypoint < this.waypoints.Length - 1)
+                if (this.turbo > 0)
                 {
-                    this.nextWaypoint += 1;
-                }
-                else
-                {
-                    this.nextWaypoint = 0;
+                    this.turbo = Mathf.Lerp(this.turbo, 0, Time.deltaTime);
                 }
 
                 this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
+                if (this.distanceToNextWaypoint > 3f) 
+                {
+                    this.forceUpdateWaypointIndex();
+                }
+                else if (this.waypoints[this.nextWaypoint].getBounds().Contains(this.transform.position))
+                {
+                    if (this.nextWaypoint < this.waypoints.Length - 1)
+                    {
+                        this.nextWaypoint += 1;
+                    }
+                    else
+                    {
+                        this.nextWaypoint = 0;
+                    }
+
+                    this.distanceToNextWaypoint = Vector2.Distance(this.transform.position, this.waypoints[this.nextWaypoint].transform.position);
+                }
+
+                this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
+            }
+            else
+            {
+                this.nextWaypoint = 0;
             }
 
-            this.gameController.currentTrack.updatePosition(this.driver.id, this.driver.driverName, this.lap, this.nextWaypoint, this.distanceToNextWaypoint);
-
+            print(this.audioPitch);
+            //print(this.maxSpeed);
+            print(this.audioFactor);
+            //print(this.rb.velocity.magnitude);
             if(this.audioPitch < MIN_PITCH)
             {
                 this.engineAudio.pitch = MIN_PITCH;
@@ -77,7 +94,7 @@ public class CarController: MonoBehaviour
     void LateUpdate()
     {
         this.dustParticles.gameObject.SetActive(this.rb.velocity != Vector2.zero);
-        this.audioPitch = (this.rb.velocity.magnitude * 3.6f) / this.maxSpeed;
+        this.audioPitch = Mathf.Pow(this.audioFactor, this.rb.velocity.magnitude);
     }
 
     public bool shouldGetNewLap()

@@ -9,8 +9,10 @@ public class EnemyCarController: CarController
     private Transform mainTarget;
     private DriverController driver;
     
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
+
         this.driver = this.GetComponent<DriverController>();
         this.waypointTarget = this.nextWaypoint;
         this.maxSpeed = MAX_SPEED;

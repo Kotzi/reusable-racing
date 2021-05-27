@@ -1,5 +1,7 @@
 using UnityEngine;
 using Cinemachine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
@@ -146,21 +148,22 @@ public class GameController : MonoBehaviour
             }
         }
 
-        var redCarController = this.redCar.GetComponent<CarController>();
-        redCarController.waypoints = this.currentTrack.waypoints;
-        redCarController.forceUpdateWaypointIndex();
+        List<CarController> cars = new List<List<CarController>>()
+                                            {
+                                                new List<CarController>(this.redCar.GetComponents<CarController>()),
+                                                new List<CarController>(this.purpleCar.GetComponents<CarController>()),
+                                                new List<CarController>(this.blueCar.GetComponents<CarController>()),
+                                                new List<CarController>(this.greenCar.GetComponents<CarController>()),
+                                            }.SelectMany(x => x).ToList();
 
-        var purpleCarController = this.purpleCar.GetComponent<CarController>();
-        purpleCarController.waypoints = this.currentTrack.waypoints;
-        purpleCarController.forceUpdateWaypointIndex();
-
-        var blueCarController = this.blueCar.GetComponent<CarController>();
-        blueCarController.waypoints = this.currentTrack.waypoints;
-        blueCarController.forceUpdateWaypointIndex();
-
-        var greenCarController = this.greenCar.GetComponent<CarController>();
-        greenCarController.waypoints = this.currentTrack.waypoints;
-        greenCarController.forceUpdateWaypointIndex();
+        foreach (var car in cars)
+        {
+            if (car.enabled)
+            {
+                car.waypoints = this.currentTrack.waypoints;
+                car.forceUpdateWaypointIndex();
+            }
+        }
 
         this.mainCamera.Follow = this.player.transform;
         this.player.driverName = PersistentDataController.shared.userName;

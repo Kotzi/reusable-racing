@@ -9,8 +9,9 @@ public class PlayerCarController: CarController
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
  	const float MAX_STICKY_VELOCITY = 1.5f;
 
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
         this.maxSpeed = MAX_SPEED;
     }
 
