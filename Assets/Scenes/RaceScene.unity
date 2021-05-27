@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: id
       value: 57ef77ad-5a83-43bc-a2b1-e2f648dba2a9
       objectReference: {fileID: 0}
-    - target: {fileID: 1419442703033003198, guid: e20f45e018f634005858c9939ed8f1d7, type: 3}
-      propertyPath: driverName
-      value: purple
-      objectReference: {fileID: 0}
     - target: {fileID: 5007373839738248497, guid: e20f45e018f634005858c9939ed8f1d7, type: 3}
       propertyPath: m_Name
       value: PurpleCar
@@ -207,10 +203,6 @@ PrefabInstance:
     - target: {fileID: 2785617315347137476, guid: 3b4772de96274447c92b99b26aa5df34, type: 3}
       propertyPath: id
       value: c31511ea-f588-4da5-8419-9596d104987a
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785617315347137476, guid: 3b4772de96274447c92b99b26aa5df34, type: 3}
-      propertyPath: driverName
-      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 5831558469301599372, guid: 3b4772de96274447c92b99b26aa5df34, type: 3}
       propertyPath: m_RootOrder
@@ -904,10 +896,6 @@ PrefabInstance:
       propertyPath: id
       value: 2a95ea20-4e6c-4ca9-b9ff-478754dc0d0b
       objectReference: {fileID: 0}
-    - target: {fileID: 7069251555426520192, guid: e3473fe4b3b034225b6a3563c8854f35, type: 3}
-      propertyPath: driverName
-      value: blue
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3473fe4b3b034225b6a3563c8854f35, type: 3}
 --- !u!1 &1147572018 stripped
@@ -1358,10 +1346,6 @@ PrefabInstance:
     - target: {fileID: 3212192443580761686, guid: e7e9d7ecb5b774a33b8f26233c13a77b, type: 3}
       propertyPath: id
       value: 1f546b31-19d1-4fdf-9cc2-aa1fa1a1dd54
-      objectReference: {fileID: 0}
-    - target: {fileID: 3212192443580761686, guid: e7e9d7ecb5b774a33b8f26233c13a77b, type: 3}
-      propertyPath: driverName
-      value: green
       objectReference: {fileID: 0}
     - target: {fileID: 6544112567651318046, guid: e7e9d7ecb5b774a33b8f26233c13a77b, type: 3}
       propertyPath: m_RootOrder
