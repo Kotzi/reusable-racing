@@ -3,21 +3,19 @@ using UnityEngine;
 public class PlayerDetector: MonoBehaviour
 {
     private EnemyCarController car;
-    private Collider2D mainCollider;
-    private float cooldown = 8f;
+    private float cooldown = 5f;
+    private bool detectorEnabled = false;
 
     void Awake()
     {
         this.car = this.GetComponentInParent<EnemyCarController>();
-        this.mainCollider = this.GetComponent<Collider2D>();
-        this.mainCollider.enabled = false;
     }
 
     void Update()
     {
         if (this.cooldown <= 0)
         {
-            this.mainCollider.enabled = true;
+            this.detectorEnabled = true;
         }
         else
         {
@@ -27,7 +25,10 @@ public class PlayerDetector: MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        car.updateMainTarget(collider.transform);
+        if (this.detectorEnabled)
+        {
+            car.updateMainTarget(collider.transform);
+        }
     }
 
     void OnTriggerExit2D(Collider2D collider)
