@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerDetector: MonoBehaviour
 {
     private EnemyCarController car;
-    private float cooldown = 5f;
+    private float cooldown = 10f;
     private bool detectorEnabled = false;
 
     void Awake()

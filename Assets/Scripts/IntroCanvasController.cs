@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 
 public class IntroCanvasController : MonoBehaviour
@@ -12,13 +11,16 @@ public class IntroCanvasController : MonoBehaviour
     public TMP_Text nameContinueButtonText;
     public CanvasRenderer carPanel;
     public TMP_Text carTitleText;
+    public TMP_Text carSubitleText;
     public CanvasRenderer experiencePanel;
     public TMP_Text experienceTitleText;
     public TMP_Text experienceAmountText;
     public TMP_Text experienceLevelText;
     public TMP_Text experienceCongratsText;
+    public TMP_Text experienceContinueText;
     public CanvasRenderer introPanel;
     public TMP_Text introPanelText;
+    public TMP_Text introContinueButtonText;
     public Image trophyImage;
     public TMP_Text trophyText;
     public SceneManagerController sceneManagerController;
@@ -26,6 +28,16 @@ public class IntroCanvasController : MonoBehaviour
     void Awake()
     {
         this.introPanelText.text = LanguageController.shared.getIntroText();
+        this.introContinueButtonText.text = LanguageController.shared.getContinueButtonText();
+
+        this.nameContinueButtonText.text = LanguageController.shared.getContinueButtonText();
+        this.nameInputPlaceholderText.text = LanguageController.shared.getIntroInputPlaceholderText();
+        this.nameTitleText.text = LanguageController.shared.getIntroNameText();
+
+        this.experienceCongratsText.text = LanguageController.shared.getCongratsText();
+        this.experienceContinueText.text = LanguageController.shared.getContinueButtonText();
+        
+        this.trophyText.text = LanguageController.shared.getIntroTrophyText();
 
         if(PersistentDataController.shared == null)
         {
@@ -52,13 +64,15 @@ public class IntroCanvasController : MonoBehaviour
 
             this.trophyImage.gameObject.SetActive(PersistentDataController.shared.wonTrophy);
 
-            this.carTitleText.text = $"Hello {PersistentDataController.shared.userName}, what would you like to drive today?";
+            this.carTitleText.text = LanguageController.shared.getIntroCarTitleText(PersistentDataController.shared.userName);
 
-            this.experienceTitleText.text = $"Hello again {PersistentDataController.shared.userName}, lets take a look at that last performance";
-            this.experienceAmountText.text = $"Wow, you earned {PersistentDataController.shared.experience} experience!";
+            this.experienceTitleText.text = LanguageController.shared.getIntroExperienceTitleText(PersistentDataController.shared.userName);
+
+            this.experienceAmountText.text = LanguageController.shared.getIntroExperienceGotExperienceText(PersistentDataController.shared.experience);
             if (this.processExperience())
             {
-                this.experienceLevelText.text = $"You reached level {PersistentDataController.shared.level}";
+                this.experienceLevelText.text = LanguageController.shared.getIntroExperienceNewLevelText(PersistentDataController.shared.level);
+
             }
             else
             {
@@ -79,7 +93,7 @@ public class IntroCanvasController : MonoBehaviour
         {
             PersistentDataController.shared.userName = this.nameInputTextField.text;
 
-            this.carTitleText.text = $"Hello {PersistentDataController.shared.userName}, what would you like to drive today?";
+            this.carTitleText.text = LanguageController.shared.getIntroCarTitleText(PersistentDataController.shared.userName);
 
             this.namePanel.gameObject.SetActive(false);
             this.carPanel.gameObject.SetActive(true);

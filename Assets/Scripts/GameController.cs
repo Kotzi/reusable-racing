@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        this.youWonText.text = LanguageController.shared.getYouWonCupText();
+        this.youWonButtonText.text = LanguageController.shared.getRaceAgainText();
+
         this.sceneManager.currentSceneIndex = 3;
 
         if(PersistentDataController.shared == null)

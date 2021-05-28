@@ -1905,18 +1905,25 @@ MonoBehaviour:
   playerLivesText: {fileID: 4454549193397730079}
   playerLevelText: {fileID: 8815255857511288985}
   playerDamageText: {fileID: 3500463431148268934}
+  chopsticksText: {fileID: 5876965022536624517}
+  strawText: {fileID: 687912266116982395}
+  razorText: {fileID: 5603894740026367916}
+  bagText: {fileID: 906440117441303832}
   playerHealthSlider: {fileID: 770165103385203518}
   playerTimeSlider: {fileID: 42628528747063202}
   bagImage: {fileID: 8780107364848605397}
   bagImageCover: {fileID: 3398949096224307268}
+  bagImageCoverText: {fileID: 3580503945191091447}
   razorImage: {fileID: 8828658187524911476}
   razorImageCover: {fileID: 4781730681208592436}
+  razorImageCoverText: {fileID: 4319267321102207114}
   strawImage: {fileID: 5766874944591121934}
   strawImageCover: {fileID: 4891517909164847755}
+  strawImageCoverText: {fileID: 2361684326796071444}
   chopsticksImage: {fileID: 3136421675075783587}
   playerDiedCanvas: {fileID: 1495362317835980986}
-  playerExplosion: {fileID: 0}
-  enemyExplosion: {fileID: 0}
+  youDiedText: {fileID: 492225392882570370}
+  raceAgainButtonText: {fileID: 3284922123113338759}
 --- !u!1 &3870788677023197075
 GameObject:
   m_ObjectHideFlags: 0

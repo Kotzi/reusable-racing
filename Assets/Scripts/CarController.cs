@@ -110,13 +110,13 @@ public class CarController: MonoBehaviour
     {
         if (youWon)
         {
-            this.turbo += 5f;
+            this.turbo += 4f;
         }
 
         DOTween.Sequence()
             .Append(this.spriteRenderer.DOFade(0.5f, 0.25f))
             .Append(this.spriteRenderer.DOFade(1f, 0.25f))
-            .SetLoops(3);
+            .SetLoops(20);
 
         this.StartCoroutine(this.toggleCollider());
     }
@@ -161,7 +161,7 @@ public class CarController: MonoBehaviour
             Physics2D.IgnoreCollision(this.mainCollider, others[i].mainCollider, true);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         for (int i = 0; i < others.Length; i++)
         {

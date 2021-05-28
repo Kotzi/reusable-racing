@@ -6,9 +6,16 @@ public class RaceFinishedCanvasController : MonoBehaviour
 {
     public TMP_Text titleText;
     public TMP_Text resultsText;
+    public TMP_Text continueButtonText;
     public GameController gameController;
 
     private List<string> positions = new List<string>();
+
+    void Awake()
+    {
+        this.titleText.text = LanguageController.shared.getRaceFinishedTitleText();
+        this.continueButtonText.text = LanguageController.shared.getContinueButtonText();
+    }
 
     public void addPosition(string name, List<(string, int, int, float, string)> fillWith)
     {

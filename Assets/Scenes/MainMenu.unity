@@ -648,7 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jamText: {fileID: 2140852407}
   genresText: {fileID: 1801030470}
-  StartButtonText: {fileID: 720679003}
+  startButtonText: {fileID: 720679003}
   SoundButton: {fileID: 1904509716}
 --- !u!1 &720679000
 GameObject:

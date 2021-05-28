@@ -6,7 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
     public TMP_Text jamText;
     public TMP_Text genresText;
-    public TMP_Text StartButtonText;
+    public TMP_Text startButtonText;
     public SoundButton SoundButton;
     private LanguageController LanguageController;
     private SceneManagerController SceneManagerController;
@@ -47,6 +47,8 @@ public class MainMenuController : MonoBehaviour
 
     private void reloadTexts()
     {
-        StartButtonText.text = LanguageController.getStartButtonText();
+        this.startButtonText.text = LanguageController.shared.getStartButtonText();
+        this.jamText.text = LanguageController.shared.getJamText();
+        this.genresText.text = LanguageController.shared.getGenresText();
     }
 }

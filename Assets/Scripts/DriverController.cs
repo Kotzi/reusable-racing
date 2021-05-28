@@ -68,7 +68,7 @@ public class DriverController: MonoBehaviour
             this.car.isAlive = false;
             this.car.gameController.enemyDied(this.id);
             this.explosion.SetActive(true);
-            Destroy(this.gameObject, 0.9f);
+            Destroy(this.gameObject, 1.5f);
         }
         else if (this.health <= 0)
         {
