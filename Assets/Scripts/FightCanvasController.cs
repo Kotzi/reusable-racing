@@ -5,13 +5,13 @@ using DG.Tweening;
 
 public class FightCanvasController: MonoBehaviour
 {
-    const int BAG_DAMAGE = 30;
+    const int BAG_DAMAGE = 35;
     const float BAG_ACCURACY = 0.75f;
-    const int RAZOR_DAMAGE = 20;
+    const int RAZOR_DAMAGE = 23;
     const float RAZOR_ACCURACY = 0.8f;
-    const int STRAW_DAMAGE = 15;
+    const int STRAW_DAMAGE = 17;
     const float STRAW_ACCURACY = 0.9f;
-    const int CHOPSTICKS_DAMAGE = 10;
+    const int CHOPSTICKS_DAMAGE = 12;
     const float CHOPSTICKS_ACCURACY = 1f;
     const float ENEMY_MAX_COOLDOWN = 2f;
 
@@ -156,6 +156,12 @@ public class FightCanvasController: MonoBehaviour
         this.playerHealthSlider.value = player.healthPercentage();
         this.playerImage.transform.DOShakePosition(0.25f, 3f, 15).SetLoops(-1);
 
+        if (PersistentDataController.shared.currentTrack == 3)
+        {
+            this.enemyImage.transform.localEulerAngles = Vector3.one;
+            this.enemyImage.rectTransform.sizeDelta = new Vector2(120f, 120f);
+        }
+
         DOTween.Sequence()
                 .Join(this.titleText.transform.DOScale(Vector3.one * 3f, 0.3f))
                 .Join(this.titleText.DOFade(0.5f, 0.3f))
@@ -193,7 +199,7 @@ public class FightCanvasController: MonoBehaviour
     {
         if (this.playerWait >= 1f)
         {
-            this.playerImage.transform.DOPunchPosition(new Vector2(-20f, 20f), 0.25f);
+            this.playerImage.transform.DOPunchPosition(new Vector2(20f, 20f), 0.25f);
             this.playerWait = 0f;
             this.playerTimeSlider.value = 0f;
 
@@ -234,7 +240,7 @@ public class FightCanvasController: MonoBehaviour
 
     void attackPlayer(int damage, float accuracy)
     {
-        this.enemyImage.transform.DOPunchPosition(new Vector2(20f, 20f), 0.25f);
+        this.enemyImage.transform.DOPunchPosition(new Vector2(-20f, -20f), 0.25f);
 
         if (Random.value <= accuracy)
         {

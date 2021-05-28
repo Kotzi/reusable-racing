@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerCarController: CarController
 {
 	const float SPEED_FORCE = 10f;
-    const float MAX_SPEED = 5f;
+    const float MAX_SPEED = 5.25f;
 	const float TORQUE_FORCE = -120f;
 	const float DRIFT_FACTOR_STICKY = 0.4f;
 	const float DRIFT_FACTOR_SLIPPY = 0.5f;
@@ -47,13 +47,18 @@ public class PlayerCarController: CarController
                 this.rb.AddForce(this.transform.up * (this.speedForce + this.turbo));
             }
 
+            float torqueFactor = Mathf.Lerp(0, this.torqueForce, this.rb.velocity.magnitude / 2);
             if(Input.GetButton("Brake")) 
             {
-                this.rb.AddForce(this.transform.up * -this.speedForce/2f);
+                var force = this.transform.up * -this.speedForce/2f;
+                if (Vector2.Dot(force, this.rb.velocity) == 1f) {
+                    torqueFactor *= -1;
+                }
+
+                this.rb.AddForce(force);
             }
 
-            float tf = Mathf.Lerp(0, this.torqueForce, this.rb.velocity.magnitude / 2);
-            this.rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+            this.rb.angularVelocity = Input.GetAxis("Horizontal") * torqueFactor;
         }
         else
         {

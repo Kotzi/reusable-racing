@@ -206,6 +206,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        this.mainCamera.m_Lens.OrthographicSize = Mathf.Lerp(this.mainCamera.m_Lens.OrthographicSize, Mathf.Clamp(3f + this.player.car.rb.velocity.magnitude/this.player.car.maxSpeed, 2.5f, 4.5f), Time.deltaTime);
+    }
+
     public void fight(DriverController enemy)
     {
         if (!this.isFighting)

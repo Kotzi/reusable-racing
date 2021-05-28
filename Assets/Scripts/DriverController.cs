@@ -38,7 +38,6 @@ public class DriverController: MonoBehaviour
     {
         return this.spriteRenderer.sprite;
     }
-
     public void takeDamage(int amount)
     {
         this.health -= amount;
@@ -68,6 +67,7 @@ public class DriverController: MonoBehaviour
             this.car.isAlive = false;
             this.car.gameController.enemyDied(this.id);
             this.explosion.SetActive(true);
+            this.explosion.GetComponent<Animator>().Play("Explosion");
             Destroy(this.gameObject, 1.5f);
         }
         else if (this.health <= 0)

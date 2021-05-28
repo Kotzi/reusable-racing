@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class KotziSceneController: MonoBehaviour
 {
-    private const float MAX_TIMER = 1f;
+    private const float MAX_TIMER = 2.5f;
 
     public Image image;
     public SceneManagerController sceneManagerController;
