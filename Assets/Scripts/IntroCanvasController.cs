@@ -11,7 +11,7 @@ public class IntroCanvasController : MonoBehaviour
     public TMP_Text nameContinueButtonText;
     public CanvasRenderer carPanel;
     public TMP_Text carTitleText;
-    public TMP_Text carSubitleText;
+    public TMP_Text carSubtitleText;
     public CanvasRenderer experiencePanel;
     public TMP_Text experienceTitleText;
     public TMP_Text experienceAmountText;
@@ -36,8 +36,9 @@ public class IntroCanvasController : MonoBehaviour
 
         this.experienceCongratsText.text = LanguageController.shared.getCongratsText();
         this.experienceContinueText.text = LanguageController.shared.getContinueButtonText();
-        
         this.trophyText.text = LanguageController.shared.getIntroTrophyText();
+
+        this.carSubtitleText.text = LanguageController.shared.getIntroCarSubtitleText();
 
         if(PersistentDataController.shared == null)
         {
